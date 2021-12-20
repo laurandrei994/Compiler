@@ -1,0 +1,64 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2016 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY                                                    */
+#ifndef QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__MEMBER__MISC
+#define QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__MEMBER__MISC
+
+#include "quexProcessed/lib/definitions"
+
+
+
+
+
+inline void        quexProcessed_MF_error_code_clear(quexProcessed* me);
+inline bool        quexProcessed_MF_error_code_is_void(quexProcessed* me);
+inline void        quexProcessed_MF_error_code_set_void(quexProcessed* me);
+inline void        quexProcessed_MF_error_code_set_if_first(quexProcessed* me, E_Error ErrorCode);
+
+/* Activate/deactivate byte order reversion (big-/little-endian) */
+inline bool        quexProcessed_MF_byte_order_reversion(quexProcessed* me);
+inline void        quexProcessed_MF_byte_order_reversion_set(quexProcessed* me,
+                                                            bool                Value);
+/* Version information */
+inline const char* quexProcessed_MF_version(quexProcessed* me); 
+
+inline quexProcessed_Token*  quexProcessed_MF_token_p(quexProcessed* me);
+inline void              quexProcessed_MF_send(quexProcessed* me, 
+                                                 quexProcessed_token_id_t  Id);
+inline void              quexProcessed_MF_send_n(quexProcessed* me, 
+                                                   quexProcessed_token_id_t  Id, 
+                                                   size_t              RepetitionN);
+inline bool              quexProcessed_MF_send_text(quexProcessed* me, 
+                                                      quexProcessed_token_id_t  Id,
+                                                      quexProcessed_lexatom_t*  BeginP, 
+                                                      quexProcessed_lexatom_t*  EndP);
+inline bool              quexProcessed_MF_send_string(quexProcessed* me,
+                                                        quexProcessed_token_id_t  Id,
+                                                        quexProcessed_lexatom_t*  ZeroTerminatedString);
+
+inline const char*
+                 quexProcessed_MF_input_name(quexProcessed* me);
+inline bool quexProcessed_MF_input_name_set(quexProcessed* me, 
+                                              const char*         InputNameP);
+/* Print */
+inline void    quexProcessed_MF_print_this(quexProcessed* me);
+extern      void    quexProcessed_user_print(quexProcessed* me);
+
+
+inline size_t quexProcessed_MF_line_number(const quexProcessed* me);
+inline size_t quexProcessed_MF_line_number_at_begin(const quexProcessed* me);
+inline size_t quexProcessed_MF_line_number_at_end(const quexProcessed* me);
+inline void   quexProcessed_MF_line_number_set(quexProcessed* me, size_t Y);
+
+
+inline size_t quexProcessed_MF_column_number(const quexProcessed* me);
+inline size_t quexProcessed_MF_column_number_at_begin(const quexProcessed* me);
+inline size_t quexProcessed_MF_column_number_at_end(const quexProcessed* me);
+inline void   quexProcessed_MF_column_number_set(quexProcessed* me, size_t X);
+
+
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__MEMBER__MISC */
+

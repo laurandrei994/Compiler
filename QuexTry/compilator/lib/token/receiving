@@ -1,0 +1,29 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef QUEX_INCLUDE_GUARD_compilator__TOKEN__RECEIVING
+#define QUEX_INCLUDE_GUARD_compilator__TOKEN__RECEIVING
+
+#include "compilator\lib\definitions"
+
+
+
+inline bool
+compilator_MF_run(compilator* me, 
+                  bool                (*callback_on_token)(compilator_Token*),
+                  bool                ErrorPrintF);
+
+inline  void
+compilator_MF_receive(compilator* me, 
+                      compilator_Token**   token_pp);
+
+inline compilator_Token*
+compilator_receive_from_chunk(compilator*  me, 
+                              bool                 EndOfChunkF,
+                              compilator_token_id_t   StreamTerminatingTokenId);
+
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_compilator__TOKEN__RECEIVING */
+

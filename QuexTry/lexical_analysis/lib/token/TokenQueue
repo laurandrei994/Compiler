@@ -1,0 +1,65 @@
+/* -*- C++ -*- vim: set syntax=cpp: 
+ * (C) 2004-2009 Frank-Rene Schaefer                               */
+#ifndef QUEX_INCLUDE_GUARD_Calc_lexer__TOKEN__TOKEN_QUEUE
+#define QUEX_INCLUDE_GUARD_Calc_lexer__TOKEN__TOKEN_QUEUE
+
+#include "lexical_analysis/lib/definitions"
+#include "lexical_analysis/lib/quex/asserts"
+#include "lexical_analysis/lib/quex/MemoryManager"
+#include "lexical_analysis/Calc_lexer-token.h"
+/* #include "lexical_analysis/Calc_lexer.h" */
+
+
+
+typedef struct QUEX_Calc_lexer_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT {
+    struct Calc_lexer_tag* the_lexer;
+
+    struct Calc_lexer_Token_tag*   begin;
+    struct Calc_lexer_Token_tag*   read_iterator;    /* pointer to next token to be read          */
+    struct Calc_lexer_Token_tag*   write_iterator;   /* pointer to next token to be written       */
+    struct Calc_lexer_Token_tag*   end;
+
+} Calc_lexer_TokenQueue;
+
+ void             Calc_lexer_TokenQueue_reset(Calc_lexer_TokenQueue* me);
+ void             Calc_lexer_TokenQueue_init(Calc_lexer_TokenQueue* me, 
+                                                        struct Calc_lexer_Token_tag*       Memory, 
+                                                        struct Calc_lexer_Token_tag*       MemoryEnd); 
+ bool             Calc_lexer_TokenQueue_construct(Calc_lexer_TokenQueue* me, 
+                                                             struct Calc_lexer_tag*    lexer,
+                                                             const size_t           N);
+ struct Calc_lexer_Token_tag* Calc_lexer_TokenQueue_last_token(Calc_lexer_TokenQueue* me);
+
+ void             Calc_lexer_TokenQueue_resources_absent_mark(Calc_lexer_TokenQueue* me);
+ bool             Calc_lexer_TokenQueue_resources_absent(Calc_lexer_TokenQueue* me);
+ void             Calc_lexer_TokenQueue_destruct(Calc_lexer_TokenQueue* me);
+ void             Calc_lexer_TokenQueue_remainder_get(Calc_lexer_TokenQueue* me,
+                                                                 struct Calc_lexer_Token_tag**      begin,
+                                                                 struct Calc_lexer_Token_tag**      end);
+ void             Calc_lexer_TokenQueue_memory_get(Calc_lexer_TokenQueue* me,
+                                                              struct Calc_lexer_Token_tag**      memory,
+                                                              size_t*                n);
+ bool             Calc_lexer_TokenQueue_is_full(Calc_lexer_TokenQueue* me);
+ bool             Calc_lexer_TokenQueue_is_empty(Calc_lexer_TokenQueue* me);
+ void             Calc_lexer_TokenQueue_push(Calc_lexer_TokenQueue* me,
+                                                        Calc_lexer_token_id_t     Id);
+ bool             Calc_lexer_TokenQueue_push_text(Calc_lexer_TokenQueue* me,
+                                                             Calc_lexer_token_id_t     Id,
+                                                             Calc_lexer_lexatom_t*     BeginP,
+                                                             Calc_lexer_lexatom_t*     EndP);
+ void             Calc_lexer_TokenQueue_push_repeated(Calc_lexer_TokenQueue* me,
+                                                                 Calc_lexer_token_id_t     Id,
+                                                                 size_t                 RepetitionN);
+ struct Calc_lexer_Token_tag* Calc_lexer_TokenQueue_pop(Calc_lexer_TokenQueue* me);
+ struct Calc_lexer_Token_tag* Calc_lexer_TokenQueue_begin(Calc_lexer_TokenQueue* me);
+ struct Calc_lexer_Token_tag* Calc_lexer_TokenQueue_back(Calc_lexer_TokenQueue* me);
+ size_t           Calc_lexer_TokenQueue_available_n(Calc_lexer_TokenQueue* me); 
+ void             Calc_lexer_TokenQueue_set_token_TERMINATION(Calc_lexer_TokenQueue* me);
+
+
+ bool             Calc_lexer_TokenQueue_assert_before_sending(Calc_lexer_TokenQueue* me);
+ bool             Calc_lexer_TokenQueue_assert_after_sending(Calc_lexer_TokenQueue* me);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_Calc_lexer__TOKEN__TOKEN_QUEUE */

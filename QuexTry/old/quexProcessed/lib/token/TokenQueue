@@ -1,0 +1,65 @@
+/* -*- C++ -*- vim: set syntax=cpp: 
+ * (C) 2004-2009 Frank-Rene Schaefer                               */
+#ifndef QUEX_INCLUDE_GUARD_quexProcessed__TOKEN__TOKEN_QUEUE
+#define QUEX_INCLUDE_GUARD_quexProcessed__TOKEN__TOKEN_QUEUE
+
+#include "quexProcessed/lib/definitions"
+#include "quexProcessed/lib/quex/asserts"
+#include "quexProcessed/lib/quex/MemoryManager"
+#include "quexProcessed/quexProcessed-token"
+/* #include "quexProcessed/quexProcessed" */
+
+
+
+typedef struct QUEX_quexProcessed_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT {
+    quexProcessed* the_lexer;
+
+    quexProcessed_Token*   begin;
+    quexProcessed_Token*   read_iterator;    /* pointer to next token to be read          */
+    quexProcessed_Token*   write_iterator;   /* pointer to next token to be written       */
+    quexProcessed_Token*   end;
+
+} quexProcessed_TokenQueue;
+
+inline void             quexProcessed_TokenQueue_reset(quexProcessed_TokenQueue* me);
+inline void             quexProcessed_TokenQueue_init(quexProcessed_TokenQueue* me, 
+                                                        quexProcessed_Token*       Memory, 
+                                                        quexProcessed_Token*       MemoryEnd); 
+inline bool             quexProcessed_TokenQueue_construct(quexProcessed_TokenQueue* me, 
+                                                             quexProcessed*    lexer,
+                                                             const size_t           N);
+inline quexProcessed_Token* quexProcessed_TokenQueue_last_token(quexProcessed_TokenQueue* me);
+
+inline void             quexProcessed_TokenQueue_resources_absent_mark(quexProcessed_TokenQueue* me);
+inline bool             quexProcessed_TokenQueue_resources_absent(quexProcessed_TokenQueue* me);
+inline void             quexProcessed_TokenQueue_destruct(quexProcessed_TokenQueue* me);
+inline void             quexProcessed_TokenQueue_remainder_get(quexProcessed_TokenQueue* me,
+                                                                 quexProcessed_Token**      begin,
+                                                                 quexProcessed_Token**      end);
+inline void             quexProcessed_TokenQueue_memory_get(quexProcessed_TokenQueue* me,
+                                                              quexProcessed_Token**      memory,
+                                                              size_t*                n);
+inline bool             quexProcessed_TokenQueue_is_full(quexProcessed_TokenQueue* me);
+inline bool             quexProcessed_TokenQueue_is_empty(quexProcessed_TokenQueue* me);
+inline void             quexProcessed_TokenQueue_push(quexProcessed_TokenQueue* me,
+                                                        quexProcessed_token_id_t     Id);
+inline bool             quexProcessed_TokenQueue_push_text(quexProcessed_TokenQueue* me,
+                                                             quexProcessed_token_id_t     Id,
+                                                             quexProcessed_lexatom_t*     BeginP,
+                                                             quexProcessed_lexatom_t*     EndP);
+inline void             quexProcessed_TokenQueue_push_repeated(quexProcessed_TokenQueue* me,
+                                                                 quexProcessed_token_id_t     Id,
+                                                                 size_t                 RepetitionN);
+inline quexProcessed_Token* quexProcessed_TokenQueue_pop(quexProcessed_TokenQueue* me);
+inline quexProcessed_Token* quexProcessed_TokenQueue_begin(quexProcessed_TokenQueue* me);
+inline quexProcessed_Token* quexProcessed_TokenQueue_back(quexProcessed_TokenQueue* me);
+inline size_t           quexProcessed_TokenQueue_available_n(quexProcessed_TokenQueue* me); 
+inline void             quexProcessed_TokenQueue_set_token_TERMINATION(quexProcessed_TokenQueue* me);
+
+
+inline bool             quexProcessed_TokenQueue_assert_before_sending(quexProcessed_TokenQueue* me);
+inline bool             quexProcessed_TokenQueue_assert_after_sending(quexProcessed_TokenQueue* me);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_quexProcessed__TOKEN__TOKEN_QUEUE */

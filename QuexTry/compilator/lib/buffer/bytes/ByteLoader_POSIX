@@ -1,0 +1,30 @@
+#ifndef  QUEX_INCLUDE_GUARD_compilator__BUFFER__BYTES__BYTE_LOADER_POSIX
+#define  QUEX_INCLUDE_GUARD_compilator__BUFFER__BYTES__BYTE_LOADER_POSIX
+
+#include "compilator\lib\buffer/bytes/ByteLoader"
+
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <fcntl.h>  /* POSIX file handling. */
+#include <unistd.h> /* POSIX file handling. */
+
+#ifdef __cplusplus
+}
+#endif
+
+typedef struct QUEX_compilator_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT { 
+    compilator_ByteLoader  base;
+    int                    fd;
+} compilator_ByteLoader_POSIX;
+
+inline compilator_ByteLoader*    compilator_ByteLoader_POSIX_new(int fd);
+inline compilator_ByteLoader*    compilator_ByteLoader_POSIX_new_from_file_name(const char*);
+
+
+
+#endif /*  QUEX_INCLUDE_GUARD_compilator__BUFFER__BYTES__BYTE_LOADER_POSIX */
+

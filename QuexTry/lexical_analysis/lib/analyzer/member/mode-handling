@@ -1,0 +1,27 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__MEMBER__MODE_HANDLING
+#define QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__MEMBER__MODE_HANDLING
+
+#include "lexical_analysis/lib/definitions"
+#include "lexical_analysis/lib/analyzer/Mode"
+
+
+
+/* Read Access */
+ const Calc_lexer_Mode*   Calc_lexer_MF_mode(struct Calc_lexer_tag* me);
+ void               Calc_lexer_MF_set_mode_brutally(struct Calc_lexer_tag*     me,
+                                                               const Calc_lexer_Mode*  Mode);
+ void               Calc_lexer_MF_enter_mode(struct Calc_lexer_tag*    me,
+                                                        const Calc_lexer_Mode* TargetMode);
+
+/* Changing Modes with stack */ 
+ void        Calc_lexer_MF_pop_mode(struct Calc_lexer_tag* me);
+ void        Calc_lexer_MF_pop_drop_mode(struct Calc_lexer_tag* me);
+ void        Calc_lexer_MF_push_mode(struct Calc_lexer_tag* me, Calc_lexer_Mode* new_mode);
+  
+
+
+#endif /* QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__MEMBER__MODE_HANDLING */
+

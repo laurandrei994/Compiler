@@ -1,0 +1,56 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__STRUCT__INCLUDE_STACK
+#define QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__STRUCT__INCLUDE_STACK
+
+#include "quexProcessed/lib/definitions"
+
+ 
+
+/* The constructor 'core' function is implemented per analyzer.
+ * It's implementation happens inside the generated source file.             */
+
+/* Level (1) __________________________________________________________________
+ *                                                                           */
+inline bool quexProcessed_MF_include_push_file_name(quexProcessed*   me,
+                                                   const char*           Filename, 
+                                                   quexProcessed_Converter* converter);
+
+/* Level (3) __________________________________________________________________
+ *                                                                           */
+inline bool quexProcessed_MF_include_push_ByteLoader(
+                           quexProcessed*    me,
+                           const char*            InputName,
+                           quexProcessed_ByteLoader* byte_loader,
+                           quexProcessed_Converter*  converter);
+
+/* Level (5) __________________________________________________________________
+ *                                                                           */
+inline bool quexProcessed_MF_include_push_memory(
+                           quexProcessed*  me,
+                           const char*          InputName,
+                           quexProcessed_lexatom_t*   BufferMemoryBegin, 
+                           size_t               BufferMemorySize,
+                           quexProcessed_lexatom_t*   BufferEndOfFileP); 
+
+/* Basic constructions ________________________________________________________
+ *                                                                           */
+inline bool   quexProcessed_MF_include_push_core(quexProcessed*       me,
+                                                const char*               InputNameP,
+                                                quexProcessed_Buffer*        new_buffer,
+                                                quexProcessed_LexatomLoader* new_filler);
+inline bool   quexProcessed_MF_include_pop(quexProcessed* me);
+inline void   quexProcessed_MF_include_stack_delete(quexProcessed* me);
+inline bool   quexProcessed_MF_include_detect_recursion(quexProcessed* me,
+                                                       const char*         InputName);
+
+extern bool        quexProcessed_user_memento_pack(quexProcessed* me, 
+                                                const char*         InputName,
+                                                quexProcessed_Memento* memento);
+extern void        quexProcessed_user_memento_unpack(quexProcessed* me, 
+                                                  quexProcessed_Memento* memento);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__STRUCT__INCLUDE_STACK */

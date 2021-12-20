@@ -1,0 +1,28 @@
+/* vim: ft=c: 
+ * (C) Frank-Rene Schaefer */
+#ifndef  QUEX_INCLUDE_GUARD_Calc_lexer__BUFFER__BYTES__BYTE_LOADER_FILE
+#define  QUEX_INCLUDE_GUARD_Calc_lexer__BUFFER__BYTES__BYTE_LOADER_FILE
+
+#include "lexical_analysis/lib/buffer/bytes/ByteLoader"
+
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+#include <stdio.h>
+#ifdef __cplusplus
+}
+#endif
+
+typedef struct QUEX_Calc_lexer_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT { 
+    Calc_lexer_ByteLoader  base;
+    FILE*                  input_handle;
+} Calc_lexer_ByteLoader_FILE;
+
+ Calc_lexer_ByteLoader*    Calc_lexer_ByteLoader_FILE_new(FILE* fh, bool BinaryModeF);
+ Calc_lexer_ByteLoader*    Calc_lexer_ByteLoader_FILE_new_from_file_name(const char*);
+
+
+
+#endif /*  QUEX_INCLUDE_GUARD_Calc_lexer__BUFFER__BYTES__BYTE_LOADER_FILE */

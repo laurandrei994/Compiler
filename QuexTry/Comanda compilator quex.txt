@@ -1,0 +1,1 @@
+quex -i compilator.qx -o compilator --token-id-prefix TKN_ >> result.txt

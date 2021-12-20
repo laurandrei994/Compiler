@@ -1,0 +1,52 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ *
+ * Important:
+ *                  RESET != DESTRUCTOR + CONSTRUCTOR
+ *
+ * because DESTRUCTOR and CONSTRUCTOR may involve resource de-allocation and
+ * resource re-allocation. Reset, instead may work on existing resources.
+ *
+ * (C) 2005-2017 Frank-Rene Schaefer
+ *
+ * ABSOLUTELY NO WARRANTY                                                    */
+#ifndef QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__STRUCT__RESET
+#define QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__STRUCT__RESET
+
+#include "lexical_analysis/lib/definitions"
+
+ 
+
+/* The constructor 'core' function is implemented per analyzer.
+ * It's implementation happens inside the generated source file.             */
+
+/* Level (0) __________________________________________________________________
+ *                                                                           */
+ bool Calc_lexer_MF_reset(struct Calc_lexer_tag* me);
+
+/* Level (1) __________________________________________________________________
+ *                                                                           */
+ bool Calc_lexer_MF_reset_file_name(struct Calc_lexer_tag*   me,
+                                               const char*           Filename, 
+                                               Calc_lexer_Converter* converter);
+
+/* Level (3) __________________________________________________________________
+ *                                                                           */
+ bool Calc_lexer_MF_reset_ByteLoader(struct Calc_lexer_tag*    me,
+                                                Calc_lexer_ByteLoader* byte_loader,
+                                                Calc_lexer_Converter*  converter);
+
+/* Level (5) __________________________________________________________________
+ *                                                                           */
+ bool Calc_lexer_MF_reset_memory(struct Calc_lexer_tag* me,
+                                            Calc_lexer_lexatom_t*  BufferMemoryBegin, 
+                                            size_t              BufferMemorySize,
+                                            Calc_lexer_lexatom_t*  BufferEndOfFileP); 
+
+/* Basic constructions ________________________________________________________
+ *                                                                           */
+ bool Calc_lexer_MF_reset_all_but_buffer(struct Calc_lexer_tag* me);
+extern      bool Calc_lexer_user_reset(struct Calc_lexer_tag* me);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__STRUCT__RESET */

@@ -1,0 +1,46 @@
+/* -*- C++ -*-   vim:set syntax=cpp:
+ * 
+ * PURPOSE: Gavaging -- Running lexical analysis based on content that is fed
+ *                      via direct access to the analyzer's internal buffer.
+ *
+ * See file 'Gavager.i' for detailed description.
+ * 
+ * (C) 2016 Frank-Rene Schaefer.                                             */
+#ifndef QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__ADAPTORS__GAVAGER
+#define QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__ADAPTORS__GAVAGER
+
+#include "lexical_analysis/lib/analyzer/adaptors/Feeder"
+
+
+
+
+
+
+typedef struct QUEX_Calc_lexer_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT Calc_lexer_Gavager_tag {
+    Calc_lexer_FeederBase  base;
+
+    bool              (*access)(struct Calc_lexer_Gavager_tag* me,
+                                void**                         begin_p, 
+                                const void**                   end_p);
+    bool              (*gavage)(struct Calc_lexer_Gavager_tag* me, 
+                                ptrdiff_t                      ReceivedN);
+    struct Calc_lexer_Token_tag*  (*deliver)(struct Calc_lexer_Gavager_tag* me);
+
+} Calc_lexer_Gavager;
+
+
+
+ void  Calc_lexer_Gavager_construct(Calc_lexer_Gavager*  me, 
+                                               struct Calc_lexer_tag*  lexer,
+                                               Calc_lexer_token_id_t   StreamTerminatingTokenId);
+ bool  Calc_lexer_Gavager_access(Calc_lexer_Gavager* me,
+                                            void**              begin_p, 
+                                            const void**        end_p);
+ bool  Calc_lexer_Gavager_gavage(Calc_lexer_Gavager* me, 
+                                            ptrdiff_t           ReceivedN);
+ struct Calc_lexer_Token_tag*  
+                  Calc_lexer_Gavager_deliver(Calc_lexer_Gavager* me);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__ADAPTORS__GAVAGER */

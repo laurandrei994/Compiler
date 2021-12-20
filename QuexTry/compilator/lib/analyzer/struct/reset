@@ -1,0 +1,52 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ *
+ * Important:
+ *                  RESET != DESTRUCTOR + CONSTRUCTOR
+ *
+ * because DESTRUCTOR and CONSTRUCTOR may involve resource de-allocation and
+ * resource re-allocation. Reset, instead may work on existing resources.
+ *
+ * (C) 2005-2017 Frank-Rene Schaefer
+ *
+ * ABSOLUTELY NO WARRANTY                                                    */
+#ifndef QUEX_INCLUDE_GUARD_compilator__ANALYZER__STRUCT__RESET
+#define QUEX_INCLUDE_GUARD_compilator__ANALYZER__STRUCT__RESET
+
+#include "compilator\lib\definitions"
+
+ 
+
+/* The constructor 'core' function is implemented per analyzer.
+ * It's implementation happens inside the generated source file.             */
+
+/* Level (0) __________________________________________________________________
+ *                                                                           */
+inline bool compilator_MF_reset(compilator* me);
+
+/* Level (1) __________________________________________________________________
+ *                                                                           */
+inline bool compilator_MF_reset_file_name(compilator*   me,
+                                               const char*           Filename, 
+                                               compilator_Converter* converter);
+
+/* Level (3) __________________________________________________________________
+ *                                                                           */
+inline bool compilator_MF_reset_ByteLoader(compilator*    me,
+                                                compilator_ByteLoader* byte_loader,
+                                                compilator_Converter*  converter);
+
+/* Level (5) __________________________________________________________________
+ *                                                                           */
+inline bool compilator_MF_reset_memory(compilator* me,
+                                            compilator_lexatom_t*  BufferMemoryBegin, 
+                                            size_t              BufferMemorySize,
+                                            compilator_lexatom_t*  BufferEndOfFileP); 
+
+/* Basic constructions ________________________________________________________
+ *                                                                           */
+inline bool compilator_MF_reset_all_but_buffer(compilator* me);
+extern      bool compilator_user_reset(compilator* me);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_compilator__ANALYZER__STRUCT__RESET */

@@ -1,0 +1,56 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__STRUCT__INCLUDE_STACK
+#define QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__STRUCT__INCLUDE_STACK
+
+#include "lexical_analysis/lib/definitions"
+
+ 
+
+/* The constructor 'core' function is implemented per analyzer.
+ * It's implementation happens inside the generated source file.             */
+
+/* Level (1) __________________________________________________________________
+ *                                                                           */
+ bool Calc_lexer_MF_include_push_file_name(struct Calc_lexer_tag*   me,
+                                                   const char*           Filename, 
+                                                   Calc_lexer_Converter* converter);
+
+/* Level (3) __________________________________________________________________
+ *                                                                           */
+ bool Calc_lexer_MF_include_push_ByteLoader(
+                           struct Calc_lexer_tag*    me,
+                           const char*            InputName,
+                           Calc_lexer_ByteLoader* byte_loader,
+                           Calc_lexer_Converter*  converter);
+
+/* Level (5) __________________________________________________________________
+ *                                                                           */
+ bool Calc_lexer_MF_include_push_memory(
+                           struct Calc_lexer_tag*  me,
+                           const char*          InputName,
+                           Calc_lexer_lexatom_t*   BufferMemoryBegin, 
+                           size_t               BufferMemorySize,
+                           Calc_lexer_lexatom_t*   BufferEndOfFileP); 
+
+/* Basic constructions ________________________________________________________
+ *                                                                           */
+ bool   Calc_lexer_MF_include_push_core(struct Calc_lexer_tag*       me,
+                                                const char*               InputNameP,
+                                                Calc_lexer_Buffer*        new_buffer,
+                                                Calc_lexer_LexatomLoader* new_filler);
+ bool   Calc_lexer_MF_include_pop(struct Calc_lexer_tag* me);
+ void   Calc_lexer_MF_include_stack_delete(struct Calc_lexer_tag* me);
+ bool   Calc_lexer_MF_include_detect_recursion(struct Calc_lexer_tag* me,
+                                                       const char*         InputName);
+
+extern bool        Calc_lexer_user_memento_pack(struct Calc_lexer_tag* me, 
+                                                const char*         InputName,
+                                                struct Calc_lexer_Memento_tag* memento);
+extern void        Calc_lexer_user_memento_unpack(struct Calc_lexer_tag* me, 
+                                                  struct Calc_lexer_Memento_tag* memento);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__STRUCT__INCLUDE_STACK */

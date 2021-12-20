@@ -1,0 +1,45 @@
+/* -*- C++ -*-   vim: set syntax=cpp:
+ * (C) Frank-Rene Schaefer                               */
+#ifndef QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__COUNTER
+#define QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__COUNTER
+
+
+   #include <stddef.h>
+
+#include "lexical_analysis/lib/definitions"
+
+
+
+
+
+typedef struct QUEX_Calc_lexer_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT {
+    
+    size_t  _line_number_at_begin;    /* line where current pattern starts   */
+    size_t  _line_number_at_end;      /* line after current pattern          */
+    
+    
+    size_t  _column_number_at_begin;  /* column where current pattern starts */
+    size_t  _column_number_at_end;    /* column after current pattern        */
+    
+    
+} Calc_lexer_Counter;
+
+
+ bool  Calc_lexer_Counter_construct(Calc_lexer_Counter*  me); 
+ void  Calc_lexer_Counter_copy_construct(Calc_lexer_Counter*      me, 
+                                                    const Calc_lexer_Counter* That);
+ void  Calc_lexer_Counter_resources_absent_mark(Calc_lexer_Counter* me);
+ bool  Calc_lexer_Counter_resources_absent(Calc_lexer_Counter* me);
+
+ void  Calc_lexer_Counter_print_this(Calc_lexer_Counter* me);
+
+#if ! defined(QUEX_OPTION_ASSERTS)
+#   define        Calc_lexer_Counter_assert_consistency(ME) /* empty */
+#else
+ void  Calc_lexer_Counter_assert_consistency(Calc_lexer_Counter* counter);
+#endif
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__COUNTER */
+

@@ -1,0 +1,45 @@
+/* -*- C++ -*-   vim: set syntax=cpp:
+ * (C) Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY                      */
+#ifndef QUEX_INCLUDE_GUARD_Calc_lexer__DECLARATIONS
+#define QUEX_INCLUDE_GUARD_Calc_lexer__DECLARATIONS
+
+/* NOT: "#include "lexical_analysis/lib/lexeme"
+ *
+ * Lexemes 'live' in the namespace of the token class. The token class 
+ * determines when the converters and helpers need to be included.            */
+
+#include "lexical_analysis/lib/analyzer/asserts"
+
+#include "lexical_analysis/lib/definitions"
+
+
+extern Calc_lexer_lexatom_t Calc_lexer_LexemeNull;
+
+
+#include "lexical_analysis/lib/quex/StrangeStream"
+
+#include "lexical_analysis/Calc_lexer-token.h"
+#include "lexical_analysis/lib/token/TokenQueue"
+#include "lexical_analysis/lib/token/receiving"
+
+#include "lexical_analysis/lib/analyzer/member/misc"
+#include "lexical_analysis/lib/analyzer/member/navigation"
+#include "lexical_analysis/lib/analyzer/member/mode-handling"
+
+#include "lexical_analysis/lib/analyzer/struct/constructor"
+#include "lexical_analysis/lib/analyzer/struct/include-stack"
+#include "lexical_analysis/lib/analyzer/struct/reset"
+
+#include "lexical_analysis/lib/buffer/Buffer"
+#include "lexical_analysis/lib/buffer/lexatoms/LexatomLoader"
+#include "lexical_analysis/lib/buffer/bytes/ByteLoader"
+
+#include "lexical_analysis/lib/analyzer/Mode"
+
+#include "lexical_analysis/lib/analyzer/Counter"
+#include "lexical_analysis/lib/lexeme/basics"
+
+#include "lexical_analysis/lib/quex/MemoryManager"
+
+#endif /* QUEX_INCLUDE_GUARD_Calc_lexer__DECLARATIONS */

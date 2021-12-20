@@ -1,0 +1,62 @@
+/* -*- C++ -*-  vim:set syntax=cpp: 
+ *
+ * (C) 2004-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__MODE
+#define QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__MODE
+
+#include "lexical_analysis/lib/definitions"
+#include "lexical_analysis/lib/buffer/Buffer"
+
+
+    
+
+   struct Calc_lexer_tag;
+
+typedef struct QUEX_Calc_lexer_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT Calc_lexer_Mode_tag {  
+    const char* name;
+
+
+    void (*on_entry)(struct Calc_lexer_tag*, const struct Calc_lexer_Mode_tag* FromMode);
+    void (*on_exit)(struct Calc_lexer_tag*, const struct Calc_lexer_Mode_tag* ToMode);
+#   ifdef QUEX_OPTION_ASSERTS
+    bool (*has_base)(const struct Calc_lexer_Mode_tag* Mode);
+    bool (*has_entry_from)(const struct Calc_lexer_Mode_tag* Mode);
+    bool (*has_exit_to)(const struct Calc_lexer_Mode_tag* Mode);
+#   endif
+
+    Calc_lexer_Buffer_event_callbacks buffer_callbacks;
+
+    /* Choose the analyzer function to be the last, because it has a unique
+     * signature. The function pointers are assigned in a table. If the 
+     * content of this class changes, any mismatch of pointers is likely
+     * to trigger a compilation error, thus signalling that the setup is
+     * incorrect.                                                        */
+    Calc_lexer_AnalyzerFunctionP      analyzer_function;
+} Calc_lexer_Mode;
+
+ void
+Calc_lexer_Mode_uncallable_analyzer_function(struct Calc_lexer_tag*);
+
+
+
+ void
+Calc_lexer_Mode_on_entry_exit_null_function(struct Calc_lexer_tag*, const Calc_lexer_Mode*);
+
+typedef struct QUEX_Calc_lexer_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT {
+    const Calc_lexer_Mode** begin;
+    const Calc_lexer_Mode** end;
+    const Calc_lexer_Mode** memory_end;
+} Calc_lexer_ModeStack;
+
+ bool  Calc_lexer_ModeStack_construct(Calc_lexer_ModeStack* me,
+                                                 const size_t          N);
+ void  Calc_lexer_ModeStack_destruct(Calc_lexer_ModeStack* me);
+ void  Calc_lexer_ModeStack_resources_absent_mark(Calc_lexer_ModeStack* me);
+ bool  Calc_lexer_ModeStack_resources_absent(Calc_lexer_ModeStack* me);
+ void  Calc_lexer_ModeStack_print(Calc_lexer_ModeStack* me);
+
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__QUEX_MODE */

@@ -1,0 +1,38 @@
+/* -*- C++ -*- vim: set syntax=cpp: */
+#ifndef QUEX_INCLUDE_GUARD_quexProcessed__BUFFER__ASSERTS
+#define QUEX_INCLUDE_GUARD_quexProcessed__BUFFER__ASSERTS
+
+#ifndef QUEX_OPTION_ASSERTS
+
+#define quexProcessed_BUFFER_ASSERT_INVARIANCE_SETUP(BI, ME)       /* empty */    
+#define quexProcessed_BUFFER_ASSERT_INVARIANCE_VERIFY(BI, ME)      /* empty */    
+#define quexProcessed_BUFFER_ASSERT_INVARIANCE_VERIFY_SAME(BI, ME) /* empty */    
+#define quexProcessed_Buffer_assert_pointers_in_range(ME)          /* empty */
+#define quexProcessed_Buffer_assert_consistency(ME)                /* empty */
+#define quexProcessed_Buffer_member_functions_assert(ME)           /* empty */
+
+#else
+#include "quexProcessed/lib/definitions"
+#include "quexProcessed/lib/buffer/Buffer"
+
+
+
+inline void quexProcessed_BUFFER_ASSERT_INVARIANCE_SETUP(quexProcessed_BufferInvariance* bi, 
+                                                           quexProcessed_Buffer*           me);
+inline void quexProcessed_BUFFER_ASSERT_INVARIANCE_VERIFY(quexProcessed_BufferInvariance* bi, 
+                                                            quexProcessed_Buffer*           me);
+inline void quexProcessed_BUFFER_ASSERT_INVARIANCE_VERIFY_SAME(quexProcessed_BufferInvariance* bi, 
+                                                                 quexProcessed_Buffer*           me);
+
+inline void quexProcessed_Buffer_assert_pointers_in_range(const quexProcessed_Buffer* B);                 
+inline void quexProcessed_Buffer_assert_limit_codes_in_place(const quexProcessed_Buffer* B);
+inline void quexProcessed_Buffer_assert_consistency(const quexProcessed_Buffer* B);                                            
+inline void quexProcessed_Buffer_assert_no_lexatom_is_buffer_border(const quexProcessed_lexatom_t* Begin, 
+                                                                      const quexProcessed_lexatom_t* End);
+inline void quexProcessed_Buffer_member_functions_assert(const quexProcessed_Buffer* me);
+
+
+
+#endif
+
+#endif /* QUEX_INCLUDE_GUARD_quexProcessed__BUFFER__ASSERTS */

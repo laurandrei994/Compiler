@@ -1,0 +1,29 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef QUEX_INCLUDE_GUARD_Calc_lexer__TOKEN__RECEIVING
+#define QUEX_INCLUDE_GUARD_Calc_lexer__TOKEN__RECEIVING
+
+#include "lexical_analysis/lib/definitions"
+
+
+
+ bool
+Calc_lexer_MF_run(struct Calc_lexer_tag* me, 
+                  bool                (*callback_on_token)(struct Calc_lexer_Token_tag*),
+                  bool                ErrorPrintF);
+
+  void
+Calc_lexer_MF_receive(struct Calc_lexer_tag* me, 
+                      struct Calc_lexer_Token_tag**   token_pp);
+
+ struct Calc_lexer_Token_tag*
+Calc_lexer_receive_from_chunk(struct Calc_lexer_tag*  me, 
+                              bool                 EndOfChunkF,
+                              Calc_lexer_token_id_t   StreamTerminatingTokenId);
+
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_Calc_lexer__TOKEN__RECEIVING */
+

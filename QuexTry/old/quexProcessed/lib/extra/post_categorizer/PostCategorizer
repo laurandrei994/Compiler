@@ -1,0 +1,65 @@
+/* -*- C++ -*-   vim:set syntax=cpp:
+ * QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__POST_CATEGORIZER may be undefined in case
+ *    that multiple lexical analyzers are used.                                       */
+#ifndef QUEX_INCLUDE_GUARD_quexProcessed__EXTRA__POST_CATEGORIZER__POST_CATEGORIZER
+#define QUEX_INCLUDE_GUARD_quexProcessed__EXTRA__POST_CATEGORIZER__POST_CATEGORIZER
+
+
+
+/*________________________________________________________________________________
+ * Post Categorization of Lexemes:
+ *
+ * The implementation of the categorization tree is a little more efficient
+ * than the STL map, since we do not iterator over the content.
+ *________________________________________________________________________________*/
+typedef struct QUEX_quexProcessed_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT quexProcessed_DictionaryNode_tag {
+    /* Store the first character separately from the remainder. This might
+     * help to avoid loading 'remotely allocated' strings into the cache if
+     * they do not fit anyway (because of their first character).                 */ 
+    quexProcessed_lexatom_t          name_first_character;
+    const quexProcessed_lexatom_t*   name_remainder;
+
+    quexProcessed_token_id_t           token_id;
+
+    struct quexProcessed_DictionaryNode_tag*   lesser;
+    struct quexProcessed_DictionaryNode_tag*   greater;
+
+} quexProcessed_DictionaryNode;
+
+
+
+    class quexProcessed_Dictionary {
+    public:
+        quexProcessed_Dictionary();
+        ~quexProcessed_Dictionary();
+
+        quexProcessed_DictionaryNode*  root;
+
+        void                enter(const quexProcessed_lexatom_t* Lexeme, 
+                                  const quexProcessed_token_id_t TokenID);
+        void                remove(const quexProcessed_lexatom_t* Lexeme);
+        quexProcessed_token_id_t  get_token_id(const quexProcessed_lexatom_t* Lexeme) const;
+        void                clear();
+        void                print_this();
+        void                (*destruct_self)(quexProcessed_Dictionary* me);
+    };
+
+
+inline bool
+quexProcessed_PostCategorizer_construct(quexProcessed_Dictionary* me);
+
+inline void
+quexProcessed_PostCategorizer_destruct(quexProcessed_Dictionary* me);
+
+inline void
+quexProcessed_PostCategorizer_resources_absent_mark(quexProcessed_Dictionary* me);
+
+inline bool
+quexProcessed_PostCategorizer_resources_absent(quexProcessed_Dictionary* me);
+
+inline void          
+quexProcessed_PostCategorizer_print_this(quexProcessed_Dictionary* me);
+                          
+
+
+#endif /* QUEX_INCLUDE_GUARD_quexProcessed__EXTRA__POST_CATEGORIZER__POSTCATEGORIZER */

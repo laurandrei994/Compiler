@@ -1,0 +1,48 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef  QUEX_INCLUDE_GUARD_compilator__ANALYZER__STRUCT__CONSTRUCTOR
+#define  QUEX_INCLUDE_GUARD_compilator__ANALYZER__STRUCT__CONSTRUCTOR
+
+#include "compilator\lib\definitions"
+#include "compilator\lib\buffer/Buffer"
+
+ 
+
+inline void compilator_from_file_name(
+                                  compilator*     me,
+                                  const char*             Filename, 
+                                  compilator_Converter*   converter);
+
+inline void compilator_from_ByteLoader(
+                                  compilator*     me,
+                                  compilator_ByteLoader*  byte_loader,
+                                  compilator_Converter*   converter);
+
+inline void compilator_from_memory(
+                                  compilator* me,
+                                  compilator_lexatom_t*  BufferMemoryBegin, 
+                                  size_t              BufferMemorySize,
+                                  compilator_lexatom_t*  BufferEndOfFileP); 
+
+/* Basic constructions ________________________________________________________
+ *                                                                           */
+inline bool compilator_construct_all_but_buffer(compilator* me, 
+                                                     bool                CallUserConstructorF);
+inline void compilator_destruct(compilator* me); 
+inline void compilator_destruct_all_but_buffer(compilator* me);
+inline void compilator_all_but_buffer_resources_absent_mark(compilator* me);
+
+inline void compilator_MF_collect_user_memory(compilator* me, 
+                                                   compilator_lexatom_t** user_buffer_memory_p);
+inline bool compilator_MF_resources_absent(compilator* me);
+inline void compilator_MF_resources_absent_mark(compilator* me);
+
+
+extern      bool compilator_user_constructor(compilator*);
+extern      void compilator_user_destructor(compilator*);
+
+ 
+
+#endif /*  QUEX_INCLUDE_GUARD_compilator__ANALYZER__STRUCT__CONSTRUCTOR */
+

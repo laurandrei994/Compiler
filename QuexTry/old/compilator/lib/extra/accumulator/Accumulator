@@ -1,0 +1,102 @@
+/* -*- C++ -*-  vim:set syntax=cpp: 
+ *
+ * (C) 2004-2009 Frank-Rene Schaefer
+ *
+ * QUEX_INCLUDE_GUARD_compilator__ANALYZER__ACCUMULATOR may be undefined in case
+ *    that multiple lexical analyzers are used. Then, the name of the
+ *    compilator_Accumulator must be different.                               */
+#ifndef QUEX_INCLUDE_GUARD_compilator__EXTRA__ACCUMULATOR__ACCUMULATOR
+#define QUEX_INCLUDE_GUARD_compilator__EXTRA__ACCUMULATOR__ACCUMULATOR
+
+/* Initial size of memory to hold accumulated text.                           */
+#if   defined(QUEX_SETTING_ACCUMULATOR_INITIAL_SIZE_EXT)
+#   define QUEX_compilator_SETTING_ACCUMULATOR_INITIAL_SIZE QUEX_SETTING_ACCUMULATOR_INITIAL_SIZE_EXT
+#elif defined(QUEX_compilator_SETTING_ACCUMULATOR_INITIAL_SIZE_EXT)
+#   define QUEX_compilator_SETTING_ACCUMULATOR_INITIAL_SIZE QUEX_compilator_SETTING_ACCUMULATOR_INITIAL_SIZE_EXT
+#else
+#   define QUEX_compilator_SETTING_ACCUMULATOR_INITIAL_SIZE 256
+#endif
+
+/* Granularity of memory allocation:
+ * Upon overload: new memory's size = current memory's size * (1 + factor)    */
+#if   defined(QUEX_SETTING_ACCUMULATOR_GRANULARITY_FACTOR_EXT)
+#   define QUEX_compilator_SETTING_ACCUMULATOR_GRANULARITY_FACTOR QUEX_SETTING_ACCUMULATOR_GRANULARITY_FACTOR_EXT
+#elif defined(QUEX_compilator_SETTING_ACCUMULATOR_GRANULARITY_FACTOR_EXT)
+#   define QUEX_compilator_SETTING_ACCUMULATOR_GRANULARITY_FACTOR QUEX_compilator_SETTING_ACCUMULATOR_GRANULARITY_FACTOR_EXT
+#else
+#   define QUEX_compilator_SETTING_ACCUMULATOR_GRANULARITY_FACTOR 0.8
+#endif
+
+#include "compilator\lib\definitions"
+
+
+
+
+
+class compilator;
+class QUEX_compilator_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT compilator_Accumulator {
+public:
+
+       size_t  _begin_line;
+     size_t  _begin_column;
+
+    struct { 
+        compilator_lexatom_t* begin;
+        compilator_lexatom_t* end;
+        compilator_lexatom_t* memory_end;
+    }                   text;
+    compilator* the_lexer;     
+
+
+    compilator_Accumulator();
+    ~compilator_Accumulator();
+
+    void   clear();
+    void   add(const compilator_lexatom_t* Begin, 
+               const compilator_lexatom_t* End);
+    void   add_character(const compilator_lexatom_t Character);
+    bool   extend(size_t MinAddSize);
+    bool   flush(compilator_token_id_t);
+    void   print_this();
+
+
+};
+
+inline bool
+compilator_Accumulator_construct(compilator_Accumulator*, compilator*);
+
+inline void
+compilator_Accumulator_destruct(compilator_Accumulator* me);
+                      
+inline void      
+compilator_Accumulator__clear(compilator_Accumulator* me);
+                      
+inline void      
+compilator_Accumulator__add(compilator_Accumulator*  me,
+                            const compilator_lexatom_t* Begin, 
+                            const compilator_lexatom_t* End);
+                      
+inline void      
+compilator_Accumulator__add_character(compilator_Accumulator*  me,
+                                      const compilator_lexatom_t  Character);
+
+inline bool
+compilator_Accumulator__flush(compilator_Accumulator*   me,
+                              const compilator_token_id_t  TokenID);
+                      
+inline void
+compilator_Accumulator_resources_absent_mark(compilator_Accumulator* me);
+
+inline bool
+compilator_Accumulator_resources_absent(compilator_Accumulator* me);
+
+inline bool
+compilator_Accumulator_init_memory(compilator_Accumulator*   me);
+
+inline void      
+compilator_Accumulator_print_this(compilator_Accumulator* me);
+                      
+
+
+
+#endif /*  QUEX_INCLUDE_GUARD_compilator__EXTRA__ACCUMULATOR__ACCUMULATOR */

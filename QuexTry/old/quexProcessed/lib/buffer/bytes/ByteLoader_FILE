@@ -1,0 +1,28 @@
+/* vim: ft=c: 
+ * (C) Frank-Rene Schaefer */
+#ifndef  QUEX_INCLUDE_GUARD_quexProcessed__BUFFER__BYTES__BYTE_LOADER_FILE
+#define  QUEX_INCLUDE_GUARD_quexProcessed__BUFFER__BYTES__BYTE_LOADER_FILE
+
+#include "quexProcessed/lib/buffer/bytes/ByteLoader"
+
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+#include <stdio.h>
+#ifdef __cplusplus
+}
+#endif
+
+typedef struct QUEX_quexProcessed_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT { 
+    quexProcessed_ByteLoader  base;
+    FILE*                  input_handle;
+} quexProcessed_ByteLoader_FILE;
+
+inline quexProcessed_ByteLoader*    quexProcessed_ByteLoader_FILE_new(FILE* fh, bool BinaryModeF);
+inline quexProcessed_ByteLoader*    quexProcessed_ByteLoader_FILE_new_from_file_name(const char*);
+
+
+
+#endif /*  QUEX_INCLUDE_GUARD_quexProcessed__BUFFER__BYTES__BYTE_LOADER_FILE */

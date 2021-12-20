@@ -1,0 +1,64 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2016 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY                                                    */
+#ifndef QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__MEMBER__MISC
+#define QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__MEMBER__MISC
+
+#include "lexical_analysis/lib/definitions"
+
+
+
+
+
+ void        Calc_lexer_MF_error_code_clear(struct Calc_lexer_tag* me);
+ bool        Calc_lexer_MF_error_code_is_void(struct Calc_lexer_tag* me);
+ void        Calc_lexer_MF_error_code_set_void(struct Calc_lexer_tag* me);
+ void        Calc_lexer_MF_error_code_set_if_first(struct Calc_lexer_tag* me, E_Error ErrorCode);
+
+/* Activate/deactivate byte order reversion (big-/little-endian) */
+ bool        Calc_lexer_MF_byte_order_reversion(struct Calc_lexer_tag* me);
+ void        Calc_lexer_MF_byte_order_reversion_set(struct Calc_lexer_tag* me,
+                                                            bool                Value);
+/* Version information */
+ const char* Calc_lexer_MF_version(struct Calc_lexer_tag* me); 
+
+ struct Calc_lexer_Token_tag*  Calc_lexer_MF_token_p(struct Calc_lexer_tag* me);
+ void              Calc_lexer_MF_send(struct Calc_lexer_tag* me, 
+                                                 Calc_lexer_token_id_t  Id);
+ void              Calc_lexer_MF_send_n(struct Calc_lexer_tag* me, 
+                                                   Calc_lexer_token_id_t  Id, 
+                                                   size_t              RepetitionN);
+ bool              Calc_lexer_MF_send_text(struct Calc_lexer_tag* me, 
+                                                      Calc_lexer_token_id_t  Id,
+                                                      Calc_lexer_lexatom_t*  BeginP, 
+                                                      Calc_lexer_lexatom_t*  EndP);
+ bool              Calc_lexer_MF_send_string(struct Calc_lexer_tag* me,
+                                                        Calc_lexer_token_id_t  Id,
+                                                        Calc_lexer_lexatom_t*  ZeroTerminatedString);
+
+ const char*
+                 Calc_lexer_MF_input_name(struct Calc_lexer_tag* me);
+ bool Calc_lexer_MF_input_name_set(struct Calc_lexer_tag* me, 
+                                              const char*         InputNameP);
+/* Print */
+ void    Calc_lexer_MF_print_this(struct Calc_lexer_tag* me);
+extern      void    Calc_lexer_user_print(struct Calc_lexer_tag* me);
+
+
+ size_t Calc_lexer_MF_line_number(const struct Calc_lexer_tag* me);
+ size_t Calc_lexer_MF_line_number_at_begin(const struct Calc_lexer_tag* me);
+ size_t Calc_lexer_MF_line_number_at_end(const struct Calc_lexer_tag* me);
+ void   Calc_lexer_MF_line_number_set(struct Calc_lexer_tag* me, size_t Y);
+
+
+ size_t Calc_lexer_MF_column_number(const struct Calc_lexer_tag* me);
+ size_t Calc_lexer_MF_column_number_at_begin(const struct Calc_lexer_tag* me);
+ size_t Calc_lexer_MF_column_number_at_end(const struct Calc_lexer_tag* me);
+ void   Calc_lexer_MF_column_number_set(struct Calc_lexer_tag* me, size_t X);
+
+
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__MEMBER__MISC */
+

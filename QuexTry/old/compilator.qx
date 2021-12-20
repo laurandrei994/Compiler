@@ -1,0 +1,330 @@
+start = PROGRAM;
+
+token_type {
+
+   header {
+       #include <iostream>
+       #include <string>
+$INCLUDE_CONVERTER_DECLARATION
+   }
+   
+   standard {
+        id            : uint32_t;
+        line_number   : size_t;
+        column_number : size_t;
+   }
+   distinct {
+       text   :  std::basic_string<QUEX_TYPE_CHARACTER>;
+   }
+
+   //inheritable;
+
+   copy {
+        self._id    = Other._id;
+        self.text   = Other.text;
+    #   ifdef     QUEX_OPTION_TOKEN_STAMPING_WITH_LINE_AND_COLUMN
+    #       ifdef QUEX_OPTION_LINE_NUMBER_COUNTING
+            self._line_n = Other._line_n;
+    #       endif
+    #       ifdef  QUEX_OPTION_COLUMN_NUMBER_COUNTING
+            self._column_n = Other._column_n;
+    #       endif
+    #   endif
+   }
+
+   body {
+   
+        inline bool operator==(uint32_t value)
+        {
+            return _id==value;
+        }
+        
+        inline bool operator!=(uint32_t value)
+        {
+            return _id!=value;
+        }   
+        
+        typedef std::basic_string<QUEX_TYPE_CHARACTER> __string;
+
+        operator 
+        const std::string() const
+        { return get_string(); }
+
+        const std::string
+        get_string() const 
+        {
+            std::string             tmp;
+
+            tmp = map_id_to_name(self._id);
+
+            tmp += " '" + pretty_char_text() + "' ";
+
+            return tmp;
+        }
+    
+        const std::string 
+        pretty_char_text() const
+        {
+#           if defined(__QUEX_OPTION_CONVERTER_HELPER)
+            std::string             tmp = __QUEX_CONVERTER_STRING(QUEX_SETTING_CODEC, char)(self.text);
+#           else
+            /* Converter helpers are only disabled automatically, if ASCII (Unicode in 0-FF)
+             * is used and the character size is 1.                                          */
+            __quex_assert(sizeof(QUEX_TYPE_CHARACTER) == 1);
+            std::string             tmp((const char*)self.text.c_str());
+#           endif
+            std::string::size_type  pos = 0;
+
+            while( (pos = tmp.find("\n") ) != __string::npos ) tmp.replace(pos, (size_t)1, "\\n");
+            while( (pos = tmp.find("\t") ) != __string::npos ) tmp.replace(pos, (size_t)1, "\\t");
+            while( (pos = tmp.find("\r") ) != __string::npos ) tmp.replace(pos, (size_t)1, "\\r");
+
+            return tmp;
+        }
+
+#       if ! defined(__QUEX_OPTION_WCHAR_T_DISABLED)
+        const std::wstring 
+        pretty_wchar_text() const
+        {
+#           if defined(__QUEX_OPTION_CONVERTER_HELPER)
+            std::wstring             tmp = __QUEX_CONVERTER_STRING(QUEX_SETTING_CODEC, wchar)(self.text);
+#           else
+            /* Converter helpers are only disabled automatically, if ASCII (Unicode in 0-FF)
+             * is used and the character size is 1.                                          */
+            __quex_assert(sizeof(QUEX_TYPE_CHARACTER) == 1);
+            std::wstring             tmp;
+            for(std::basic_string<QUEX_TYPE_CHARACTER>::const_iterator it = self.text.begin(); 
+                it != self.text.end(); ++it) {
+                tmp += (wchar_t)*it;
+            }
+#           endif
+            std::wstring::size_type  pos = 0;
+
+            while( (pos = tmp.find(L"\n") ) != __string::npos ) tmp.replace(pos, (size_t)1, L"\\n");
+            while( (pos = tmp.find(L"\t") ) != __string::npos ) tmp.replace(pos, (size_t)1, L"\\t");
+            while( (pos = tmp.find(L"\r") ) != __string::npos ) tmp.replace(pos, (size_t)1, L"\\r");
+
+            return tmp;
+        }
+#       endif
+   }
+
+   take_text {
+#       if 0
+        {
+            /* Hint for debug: To check take_text change "#if 0" to "#if 1". */
+            QUEX_TYPE_CHARACTER* it = 0x0;
+            printf("%lX ", (long)__this);
+            printf("previous:  '");
+            for(it = (QUEX_TYPE_CHARACTER*)self.text.c_str(); *it ; ++it) printf("%04X.", (int)*it);
+            printf("'\n");
+            printf("take_text: '");
+            for(it = (QUEX_TYPE_CHARACTER*)Begin; it != End; ++it) printf("%04X.", (int)*it);
+            printf("'\n");
+        }
+#       endif
+
+        /* It cannot be assumed that the lexeme is zero terminated. */
+        self.text.assign(Begin, End-Begin);
+
+#       if 0
+        {
+            /* Hint for debug: To check take_text change "#if 0" to "#if 1". */
+            QUEX_TYPE_CHARACTER* it = 0x0;
+            printf("after:     '");
+            for(it = (QUEX_TYPE_CHARACTER*)self.text.c_str(); *it ; ++it) printf("%04X.", (int)*it);
+            printf("'\n");
+        }
+#       endif
+
+        /* This token copied the text from the chunk into the string, 
+         * so we do not claim owneship over it.                       */
+        return false;      
+   }
+
+   repetition_set {
+       //self.number = N;
+   }
+
+   repetition_get {
+       //return self.number;
+   }
+
+   footer {
+        inline std::ostream&
+        operator<<(std::ostream& ostr, const QUEX_TYPE_TOKEN& Tok)
+        { ostr << std::string(Tok); return ostr; }
+        
+
+   }
+}
+
+define {
+    // Pattern definitions for example application
+    P_WHITESPACE          [ \r\t\n]+
+    P_IDENTIFIER          [_a-zA-Z][_a-zA-Z0-9]*
+    P_NUMBER              [0-9]+
+    
+    P_QUOTED_CHAR_1       ("'\\''")|("'"[^']?"'")
+    P_QUOTED_CHAR_2       "'\\"[0-9abcfnrtv\\]"'"
+    P_QUOTED_CHAR         ({P_QUOTED_CHAR_1}|{P_QUOTED_CHAR_2})
+    
+    exponent_part         [eE][\-+]?[0-9]+
+    fractional_constant   ([0-9]*"."[0-9]+)|([0-9]+".")
+    floating_constant     (({fractional_constant}{exponent_part}?)|([0-9]+{exponent_part}))[FfLl]?
+
+    integer_suffix_opt    ([uU]?[lL]?)|([lL][uU])
+    decimal_constant      [1-9][0-9]*{integer_suffix_opt}
+    octal_constant        "0"[0-7]*{integer_suffix_opt}
+    hex_constant          "0"[xX][0-9a-fA-F]+{integer_suffix_opt}
+}
+
+token {
+
+    L_PAREN;
+    R_PAREN;
+    L_BRACE;
+    R_BRACE;
+    L_SQUARE;
+    R_SQUARE;
+    DOT;
+    COLON;
+    SEMICOLON;
+    COMMA;
+    QUESTION;
+    ASSIGN;
+    PLUS;
+    PLUS_ASSIGN;
+    DOUBLE_PLUS;
+    MINUS;
+    DOUBLE_MINUS;
+    MINUS_ASSIGN;
+    MULT;
+    MULT_ASSIGN;
+    DIV;
+    DIV_ASSIGN;
+    MODULO;
+    EQUAL;
+    GREATER;
+    GREATER_EQ;
+    LESS;
+    LESS_EQ;
+    NOT;
+    NOT_EQ;
+    OR;
+    AND;
+	
+    IF;
+    ELSE;
+    SWITCH;
+    FOR;
+    DO;
+    WHILE;
+    CLASS;
+    STRUCT;
+    CONTINUE;
+    RETURN;
+    CASE;
+    DEFAULT;
+    BREAK;
+    TYPENAME;
+    OPERATOR;
+    IDENTIFIER;
+    NUMBER;
+}
+
+mode EOF_AND_FAILURE:
+<inheritable: only>
+{
+    on_end_of_stream => TKN_TERMINATION(LexemeNull);
+    on_failure       => TKN_FAILURE(Lexeme);
+}
+
+mode OPERATORS:
+<inheritable: only>
+{
+
+    "("       =>     TKN_L_PAREN();
+    ")"       =>     TKN_R_PAREN();
+    "{"       =>     TKN_L_BRACE();
+    "}"       =>     TKN_R_BRACE();
+    "["       =>     TKN_L_SQUARE();
+    "]"       =>     TKN_R_SQUARE(); 
+                     
+    "."       =>     TKN_DOT();
+    ":"       =>     TKN_COLON();
+    ";"       =>     TKN_SEMICOLON();
+    ","       =>     TKN_COMMA();
+    "?"       =>     TKN_QUESTION();
+
+    //assignment
+    "="       =>     TKN_ASSIGN();
+    "+"       =>     TKN_PLUS();
+    "+="      =>     TKN_PLUS_ASSIGN();
+    "++"      =>     TKN_DOUBLE_PLUS();
+    "-"       =>     TKN_MINUS();
+    "--"      =>     TKN_DOUBLE_MINUS();
+    "-="      =>     TKN_MINUS_ASSIGN();
+                     
+    "*"       =>     TKN_MULT();
+    "*="      =>     TKN_MULT_ASSIGN();
+    "/"       =>     TKN_DIV();
+    "/="      =>     TKN_DIV_ASSIGN();
+    "%"       =>     TKN_MODULO();
+    
+    // bitwise or logic operator
+    "=="      =>     TKN_EQUAL();
+                       
+    ">"       =>     TKN_GREATER();
+    ">="      =>     TKN_GREATER_EQ();
+    "<"       =>     TKN_LESS();
+    "<="      =>     TKN_LESS_EQ();
+                     
+    "!"       =>     TKN_NOT();
+    "!="      =>     TKN_NOT_EQ();
+              
+    "||"      =>     TKN_OR();             
+    "&&"      =>     TKN_AND();
+}
+
+mode VAR_LEXEMES :
+<inheritable: only>
+{
+    if            => TKN_IF();
+    else          => TKN_ELSE();
+    switch        => TKN_SWITCH();
+    for           => TKN_FOR();
+    do            => TKN_DO();
+    while         => TKN_WHILE();
+    
+    class         => TKN_CLASS();
+    struct        => TKN_STRUCT();
+    continue      => TKN_CONTINUE();
+    return        => TKN_RETURN();
+    case          => TKN_CASE();
+    default       => TKN_DEFAULT();
+    break         => TKN_BREAK();
+
+    typename      => TKN_TYPENAME();
+    operator      => TKN_OPERATOR();
+    
+    {P_IDENTIFIER}      => TKN_IDENTIFIER(Lexeme);
+    {P_NUMBER}          => TKN_NUMBER(Lexeme);
+    {P_QUOTED_CHAR}     => TKN_QUOTED_CHAR(Lexeme);
+
+    {decimal_constant}  => TKN_NUMBER(Lexeme);
+    {octal_constant}    => TKN_NUMBER(Lexeme);
+    {hex_constant}      => TKN_NUMBER(Lexeme);
+    {floating_constant} => TKN_NUMBER(Lexeme);
+}
+
+mode PROGRAM : OPERATORS, VAR_LEXEMES, EOF_AND_FAILURE
+<skip:       [ \r\n\t]>
+<skip_range: "/*" "*/">
+{
+    "//"([^\n]|\\[ \t]*\r?\n)*\r?\n           {} // skip cpp_comment => TKN_PP_CPPCOMMENT(Lexeme);
+    
+    \\[ \t]*\r?\n       {}                       // backslash spaces* newline should be skipped
+
+    {P_IDENTIFIER}  PRIORITY-MARK;
+}

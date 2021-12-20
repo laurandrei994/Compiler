@@ -1,0 +1,50 @@
+/* -*- C++ -*-   vim:set syntax=cpp:
+ * 
+ * PURPOSE: A 'feeder' coordinates the lexical analysis based on input that
+ *          is *NOT* delivered through a byte loader in the background. 
+ *
+ * See file 'Feeder.i' for detailed descriptions.
+ *
+ * (C) 2016 Frank-Rene Schaefer.                                             */
+#ifndef QUEX_INCLUDE_GUARD_compilator__ANALYZER__ADAPTORS__FEEDER
+#define QUEX_INCLUDE_GUARD_compilator__ANALYZER__ADAPTORS__FEEDER
+
+
+
+typedef struct {
+    compilator* lexer;
+    compilator_lexatom_t*  last_incomplete_lexeme_p;
+    compilator_token_id_t  stream_terminating_token_id;
+} compilator_FeederBase;
+
+ struct QUEX_compilator_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT compilator_Feeder {
+
+    compilator_FeederBase  base;
+
+    struct {
+        const void* begin_p;
+        const void* end_p;
+    } external_chunk;
+
+    compilator_token_id_t  stream_terminating_token_id;
+
+
+public:
+    compilator_Feeder(compilator*, compilator_token_id_t);
+    void             feed(const void* BeginP, const void* EndP);
+    compilator_Token* deliver();
+};
+
+
+
+inline void             compilator_Feeder_construct(compilator_Feeder*   me, 
+                                                         compilator* lexer,
+                                                         compilator_token_id_t  StreamTerminatingTokenId);
+inline compilator_Token* compilator_Feeder_deliver(compilator_Feeder* me);
+inline void             compilator_Feeder_feed(compilator_Feeder* me,
+                                                    const void* BeginP, 
+                                                    const void* EndP);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_compilator__ANALYZER__ADAPTORS__FEEDER */

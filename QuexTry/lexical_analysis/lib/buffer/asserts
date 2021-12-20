@@ -1,0 +1,38 @@
+/* -*- C++ -*- vim: set syntax=cpp: */
+#ifndef QUEX_INCLUDE_GUARD_Calc_lexer__BUFFER__ASSERTS
+#define QUEX_INCLUDE_GUARD_Calc_lexer__BUFFER__ASSERTS
+
+#ifndef QUEX_OPTION_ASSERTS
+
+#define Calc_lexer_BUFFER_ASSERT_INVARIANCE_SETUP(BI, ME)       /* empty */    
+#define Calc_lexer_BUFFER_ASSERT_INVARIANCE_VERIFY(BI, ME)      /* empty */    
+#define Calc_lexer_BUFFER_ASSERT_INVARIANCE_VERIFY_SAME(BI, ME) /* empty */    
+#define Calc_lexer_Buffer_assert_pointers_in_range(ME)          /* empty */
+#define Calc_lexer_Buffer_assert_consistency(ME)                /* empty */
+#define Calc_lexer_Buffer_member_functions_assert(ME)           /* empty */
+
+#else
+#include "lexical_analysis/lib/definitions"
+#include "lexical_analysis/lib/buffer/Buffer"
+
+
+
+ void Calc_lexer_BUFFER_ASSERT_INVARIANCE_SETUP(Calc_lexer_BufferInvariance* bi, 
+                                                           Calc_lexer_Buffer*           me);
+ void Calc_lexer_BUFFER_ASSERT_INVARIANCE_VERIFY(Calc_lexer_BufferInvariance* bi, 
+                                                            Calc_lexer_Buffer*           me);
+ void Calc_lexer_BUFFER_ASSERT_INVARIANCE_VERIFY_SAME(Calc_lexer_BufferInvariance* bi, 
+                                                                 Calc_lexer_Buffer*           me);
+
+ void Calc_lexer_Buffer_assert_pointers_in_range(const Calc_lexer_Buffer* B);                 
+ void Calc_lexer_Buffer_assert_limit_codes_in_place(const Calc_lexer_Buffer* B);
+ void Calc_lexer_Buffer_assert_consistency(const Calc_lexer_Buffer* B);                                            
+ void Calc_lexer_Buffer_assert_no_lexatom_is_buffer_border(const Calc_lexer_lexatom_t* Begin, 
+                                                                      const Calc_lexer_lexatom_t* End);
+ void Calc_lexer_Buffer_member_functions_assert(const Calc_lexer_Buffer* me);
+
+
+
+#endif
+
+#endif /* QUEX_INCLUDE_GUARD_Calc_lexer__BUFFER__ASSERTS */

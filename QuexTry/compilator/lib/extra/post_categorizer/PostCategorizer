@@ -1,0 +1,65 @@
+/* -*- C++ -*-   vim:set syntax=cpp:
+ * QUEX_INCLUDE_GUARD_compilator__ANALYZER__POST_CATEGORIZER may be undefined in case
+ *    that multiple lexical analyzers are used.                                       */
+#ifndef QUEX_INCLUDE_GUARD_compilator__EXTRA__POST_CATEGORIZER__POST_CATEGORIZER
+#define QUEX_INCLUDE_GUARD_compilator__EXTRA__POST_CATEGORIZER__POST_CATEGORIZER
+
+
+
+/*________________________________________________________________________________
+ * Post Categorization of Lexemes:
+ *
+ * The implementation of the categorization tree is a little more efficient
+ * than the STL map, since we do not iterator over the content.
+ *________________________________________________________________________________*/
+typedef struct QUEX_compilator_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT compilator_DictionaryNode_tag {
+    /* Store the first character separately from the remainder. This might
+     * help to avoid loading 'remotely allocated' strings into the cache if
+     * they do not fit anyway (because of their first character).                 */ 
+    compilator_lexatom_t          name_first_character;
+    const compilator_lexatom_t*   name_remainder;
+
+    compilator_token_id_t           token_id;
+
+    struct compilator_DictionaryNode_tag*   lesser;
+    struct compilator_DictionaryNode_tag*   greater;
+
+} compilator_DictionaryNode;
+
+
+
+    class compilator_Dictionary {
+    public:
+        compilator_Dictionary();
+        ~compilator_Dictionary();
+
+        compilator_DictionaryNode*  root;
+
+        void                enter(const compilator_lexatom_t* Lexeme, 
+                                  const compilator_token_id_t TokenID);
+        void                remove(const compilator_lexatom_t* Lexeme);
+        compilator_token_id_t  get_token_id(const compilator_lexatom_t* Lexeme) const;
+        void                clear();
+        void                print_this();
+        void                (*destruct_self)(compilator_Dictionary* me);
+    };
+
+
+inline bool
+compilator_PostCategorizer_construct(compilator_Dictionary* me);
+
+inline void
+compilator_PostCategorizer_destruct(compilator_Dictionary* me);
+
+inline void
+compilator_PostCategorizer_resources_absent_mark(compilator_Dictionary* me);
+
+inline bool
+compilator_PostCategorizer_resources_absent(compilator_Dictionary* me);
+
+inline void          
+compilator_PostCategorizer_print_this(compilator_Dictionary* me);
+                          
+
+
+#endif /* QUEX_INCLUDE_GUARD_compilator__EXTRA__POST_CATEGORIZER__POSTCATEGORIZER */

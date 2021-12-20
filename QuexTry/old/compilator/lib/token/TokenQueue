@@ -1,0 +1,65 @@
+/* -*- C++ -*- vim: set syntax=cpp: 
+ * (C) 2004-2009 Frank-Rene Schaefer                               */
+#ifndef QUEX_INCLUDE_GUARD_compilator__TOKEN__TOKEN_QUEUE
+#define QUEX_INCLUDE_GUARD_compilator__TOKEN__TOKEN_QUEUE
+
+#include "compilator\lib\definitions"
+#include "compilator\lib\quex/asserts"
+#include "compilator\lib\quex/MemoryManager"
+#include "compilator\compilator-token"
+/* #include "compilator\compilator" */
+
+
+
+typedef struct QUEX_compilator_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT {
+    compilator* the_lexer;
+
+    compilator_Token*   begin;
+    compilator_Token*   read_iterator;    /* pointer to next token to be read          */
+    compilator_Token*   write_iterator;   /* pointer to next token to be written       */
+    compilator_Token*   end;
+
+} compilator_TokenQueue;
+
+inline void             compilator_TokenQueue_reset(compilator_TokenQueue* me);
+inline void             compilator_TokenQueue_init(compilator_TokenQueue* me, 
+                                                        compilator_Token*       Memory, 
+                                                        compilator_Token*       MemoryEnd); 
+inline bool             compilator_TokenQueue_construct(compilator_TokenQueue* me, 
+                                                             compilator*    lexer,
+                                                             const size_t           N);
+inline compilator_Token* compilator_TokenQueue_last_token(compilator_TokenQueue* me);
+
+inline void             compilator_TokenQueue_resources_absent_mark(compilator_TokenQueue* me);
+inline bool             compilator_TokenQueue_resources_absent(compilator_TokenQueue* me);
+inline void             compilator_TokenQueue_destruct(compilator_TokenQueue* me);
+inline void             compilator_TokenQueue_remainder_get(compilator_TokenQueue* me,
+                                                                 compilator_Token**      begin,
+                                                                 compilator_Token**      end);
+inline void             compilator_TokenQueue_memory_get(compilator_TokenQueue* me,
+                                                              compilator_Token**      memory,
+                                                              size_t*                n);
+inline bool             compilator_TokenQueue_is_full(compilator_TokenQueue* me);
+inline bool             compilator_TokenQueue_is_empty(compilator_TokenQueue* me);
+inline void             compilator_TokenQueue_push(compilator_TokenQueue* me,
+                                                        compilator_token_id_t     Id);
+inline bool             compilator_TokenQueue_push_text(compilator_TokenQueue* me,
+                                                             compilator_token_id_t     Id,
+                                                             compilator_lexatom_t*     BeginP,
+                                                             compilator_lexatom_t*     EndP);
+inline void             compilator_TokenQueue_push_repeated(compilator_TokenQueue* me,
+                                                                 compilator_token_id_t     Id,
+                                                                 size_t                 RepetitionN);
+inline compilator_Token* compilator_TokenQueue_pop(compilator_TokenQueue* me);
+inline compilator_Token* compilator_TokenQueue_begin(compilator_TokenQueue* me);
+inline compilator_Token* compilator_TokenQueue_back(compilator_TokenQueue* me);
+inline size_t           compilator_TokenQueue_available_n(compilator_TokenQueue* me); 
+inline void             compilator_TokenQueue_set_token_TERMINATION(compilator_TokenQueue* me);
+
+
+inline bool             compilator_TokenQueue_assert_before_sending(compilator_TokenQueue* me);
+inline bool             compilator_TokenQueue_assert_after_sending(compilator_TokenQueue* me);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_compilator__TOKEN__TOKEN_QUEUE */

@@ -1,0 +1,76 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * PURPOSE: File containing definition of token-identifier and
+ *          a function that maps token identifiers to a string
+ *          name.
+ *
+ * NOTE: This file has been created automatically by Quex.
+ *       Visit quex.org for further info.
+ *
+ * DATE: Tue Dec  8 20:12:33 2020
+ *
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY                                                     */
+#ifndef QUEX_INCLUDE_GUARD_compilator__GENERATED_TOKEN_IDS
+#define QUEX_INCLUDE_GUARD_compilator__GENERATED_TOKEN_IDS
+
+/* Note: When multiple lexical analyzers are included, then their
+ *       token prefix must differ! Use '--token-id-prefix'.                   */
+const uint32_t TKN_AND           = ((uint32_t)10004);
+const uint32_t TKN_ASSIGN        = ((uint32_t)10005);
+const uint32_t TKN_BREAK         = ((uint32_t)10006);
+const uint32_t TKN_CASE          = ((uint32_t)10007);
+const uint32_t TKN_CLASS         = ((uint32_t)10008);
+const uint32_t TKN_COLON         = ((uint32_t)10009);
+const uint32_t TKN_COMMA         = ((uint32_t)10010);
+const uint32_t TKN_CONTINUE      = ((uint32_t)10011);
+const uint32_t TKN_DEDENT        = ((uint32_t)10000);
+const uint32_t TKN_DEFAULT       = ((uint32_t)10012);
+const uint32_t TKN_DIV           = ((uint32_t)10013);
+const uint32_t TKN_DIV_ASSIGN    = ((uint32_t)10014);
+const uint32_t TKN_DO            = ((uint32_t)10015);
+const uint32_t TKN_DOT           = ((uint32_t)10016);
+const uint32_t TKN_DOUBLE_MINUS  = ((uint32_t)10017);
+const uint32_t TKN_DOUBLE_PLUS   = ((uint32_t)10018);
+const uint32_t TKN_ELSE          = ((uint32_t)10019);
+const uint32_t TKN_EQUAL         = ((uint32_t)10020);
+const uint32_t TKN_FAILURE       = ((uint32_t)10021);
+const uint32_t TKN_FOR           = ((uint32_t)10022);
+const uint32_t TKN_GREATER       = ((uint32_t)10023);
+const uint32_t TKN_GREATER_EQ    = ((uint32_t)10024);
+const uint32_t TKN_IDENTIFIER    = ((uint32_t)10025);
+const uint32_t TKN_IF            = ((uint32_t)10026);
+const uint32_t TKN_INDENT        = ((uint32_t)10001);
+const uint32_t TKN_LESS          = ((uint32_t)10027);
+const uint32_t TKN_LESS_EQ       = ((uint32_t)10028);
+const uint32_t TKN_L_BRACE       = ((uint32_t)10029);
+const uint32_t TKN_L_PAREN       = ((uint32_t)10030);
+const uint32_t TKN_L_SQUARE      = ((uint32_t)10031);
+const uint32_t TKN_MINUS         = ((uint32_t)10032);
+const uint32_t TKN_MINUS_ASSIGN  = ((uint32_t)10033);
+const uint32_t TKN_MODULO        = ((uint32_t)10034);
+const uint32_t TKN_MULT          = ((uint32_t)10035);
+const uint32_t TKN_MULT_ASSIGN   = ((uint32_t)10036);
+const uint32_t TKN_NODENT        = ((uint32_t)10002);
+const uint32_t TKN_NOT           = ((uint32_t)10037);
+const uint32_t TKN_NOT_EQ        = ((uint32_t)10038);
+const uint32_t TKN_NUMBER        = ((uint32_t)10039);
+const uint32_t TKN_OPERATOR      = ((uint32_t)10040);
+const uint32_t TKN_OR            = ((uint32_t)10041);
+const uint32_t TKN_PLUS          = ((uint32_t)10042);
+const uint32_t TKN_PLUS_ASSIGN   = ((uint32_t)10043);
+const uint32_t TKN_QUESTION      = ((uint32_t)10044);
+const uint32_t TKN_QUOTED_CHAR   = ((uint32_t)10045);
+const uint32_t TKN_RETURN        = ((uint32_t)10046);
+const uint32_t TKN_R_BRACE       = ((uint32_t)10047);
+const uint32_t TKN_R_PAREN       = ((uint32_t)10048);
+const uint32_t TKN_R_SQUARE      = ((uint32_t)10049);
+const uint32_t TKN_SEMICOLON     = ((uint32_t)10050);
+const uint32_t TKN_STRUCT        = ((uint32_t)10051);
+const uint32_t TKN_SWITCH        = ((uint32_t)10052);
+const uint32_t TKN_TERMINATION   = ((uint32_t)0);
+const uint32_t TKN_TYPENAME      = ((uint32_t)10053);
+const uint32_t TKN_UNINITIALIZED = ((uint32_t)10003);
+const uint32_t TKN_WHILE         = ((uint32_t)10054);
+
+
+#endif /* QUEX_INCLUDE_GUARD_compilator__GENERATED_TOKEN_IDS */

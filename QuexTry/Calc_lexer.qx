@@ -1,0 +1,41 @@
+// This file has to be encoded in UTF-8
+/* With foreign token ids, the 'token' section is not allowed: 
+token {
+	DUMMY;
+    NUM;
+}
+*/
+
+start = ONE_AND_ONLY;
+
+mode ONE_AND_ONLY
+{
+	
+	<<EOF>>     => TKN_TERMINATION;
+	[0-9]+ => TKN_NUM(number=atoi((char*)Lexeme));
+ 	"struct"    => TKN_STRUCT;
+    "int"       => TKN_TYPE_INT;
+    "double"    => TKN_TYPE_DOUBLE;
+    "send"      => TKN_SEND;
+    "expect"    => TKN_EXPECT;
+    ";"         => TKN_SEMICOLON;
+    "{"         => TKN_BRACKET_OPEN;
+    "}"         => TKN_BRACKET_CLOSE;
+	"print"		=> TKN_PRINT;
+	"exit"		=> TKN_EXIT;
+    [_a-zA-Z]+  => TKN_IDENTIFIER(Lexeme);
+    [ \t]+		{}
+	['\n']	    {}
+	['+']		=> '+';
+	['\-']		=> '-';
+	['*']		=> '*';
+	['/']		=> '/';
+	['^']		=> '^';
+	['(']		=> '(';
+	[')']		=> ')';
+    ['=']		=> '=';
+
+
+}
+
+

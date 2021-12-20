@@ -1,0 +1,45 @@
+/* -*- C++ -*-   vim: set syntax=cpp:
+ * (C) Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY                      */
+#ifndef QUEX_INCLUDE_GUARD_compilator__DECLARATIONS
+#define QUEX_INCLUDE_GUARD_compilator__DECLARATIONS
+
+/* NOT: "#include "compilator\lib\lexeme"
+ *
+ * Lexemes 'live' in the namespace of the token class. The token class 
+ * determines when the converters and helpers need to be included.            */
+
+#include "compilator\lib\analyzer/asserts"
+
+#include "compilator\lib\definitions"
+
+
+extern compilator_lexatom_t compilator_LexemeNull;
+
+
+#include "compilator\lib\quex/StrangeStream"
+
+#include "compilator\compilator-token"
+#include "compilator\lib\token/TokenQueue"
+#include "compilator\lib\token/receiving"
+
+#include "compilator\lib\analyzer/member/misc"
+#include "compilator\lib\analyzer/member/navigation"
+#include "compilator\lib\analyzer/member/mode-handling"
+
+#include "compilator\lib\analyzer/struct/constructor"
+#include "compilator\lib\analyzer/struct/include-stack"
+#include "compilator\lib\analyzer/struct/reset"
+
+#include "compilator\lib\buffer/Buffer"
+#include "compilator\lib\buffer/lexatoms/LexatomLoader"
+#include "compilator\lib\buffer/bytes/ByteLoader"
+
+#include "compilator\lib\analyzer/Mode"
+
+#include "compilator\lib\analyzer/Counter"
+#include "compilator\lib\lexeme/basics"
+
+#include "compilator\lib\quex/MemoryManager"
+
+#endif /* QUEX_INCLUDE_GUARD_compilator__DECLARATIONS */

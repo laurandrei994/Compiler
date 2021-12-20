@@ -1,0 +1,45 @@
+/* -*- C++ -*-   vim: set syntax=cpp:
+ * (C) Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY                      */
+#ifndef QUEX_INCLUDE_GUARD_quexProcessed__DECLARATIONS
+#define QUEX_INCLUDE_GUARD_quexProcessed__DECLARATIONS
+
+/* NOT: "#include "quexProcessed/lib/lexeme"
+ *
+ * Lexemes 'live' in the namespace of the token class. The token class 
+ * determines when the converters and helpers need to be included.            */
+
+#include "quexProcessed/lib/analyzer/asserts"
+
+#include "quexProcessed/lib/definitions"
+
+
+extern quexProcessed_lexatom_t quexProcessed_LexemeNull;
+
+
+#include "quexProcessed/lib/quex/StrangeStream"
+
+#include "quexProcessed/quexProcessed-token"
+#include "quexProcessed/lib/token/TokenQueue"
+#include "quexProcessed/lib/token/receiving"
+
+#include "quexProcessed/lib/analyzer/member/misc"
+#include "quexProcessed/lib/analyzer/member/navigation"
+#include "quexProcessed/lib/analyzer/member/mode-handling"
+
+#include "quexProcessed/lib/analyzer/struct/constructor"
+#include "quexProcessed/lib/analyzer/struct/include-stack"
+#include "quexProcessed/lib/analyzer/struct/reset"
+
+#include "quexProcessed/lib/buffer/Buffer"
+#include "quexProcessed/lib/buffer/lexatoms/LexatomLoader"
+#include "quexProcessed/lib/buffer/bytes/ByteLoader"
+
+#include "quexProcessed/lib/analyzer/Mode"
+
+#include "quexProcessed/lib/analyzer/Counter"
+#include "quexProcessed/lib/lexeme/basics"
+
+#include "quexProcessed/lib/quex/MemoryManager"
+
+#endif /* QUEX_INCLUDE_GUARD_quexProcessed__DECLARATIONS */

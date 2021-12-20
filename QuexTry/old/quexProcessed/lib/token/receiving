@@ -1,0 +1,29 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef QUEX_INCLUDE_GUARD_quexProcessed__TOKEN__RECEIVING
+#define QUEX_INCLUDE_GUARD_quexProcessed__TOKEN__RECEIVING
+
+#include "quexProcessed/lib/definitions"
+
+
+
+inline bool
+quexProcessed_MF_run(quexProcessed* me, 
+                  bool                (*callback_on_token)(quexProcessed_Token*),
+                  bool                ErrorPrintF);
+
+inline  void
+quexProcessed_MF_receive(quexProcessed* me, 
+                      quexProcessed_Token**   token_pp);
+
+inline quexProcessed_Token*
+quexProcessed_receive_from_chunk(quexProcessed*  me, 
+                              bool                 EndOfChunkF,
+                              quexProcessed_token_id_t   StreamTerminatingTokenId);
+
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_quexProcessed__TOKEN__RECEIVING */
+

@@ -1,0 +1,35 @@
+/* -*- C++ -*-  vim: set syntax=cpp:
+ *
+ * (C) 2008 Frank-Rene Schaefer */
+#ifndef QUEX_INCLUDE_GUARD_Calc_lexer__BUFFER__BUFFER_PRINT
+#define QUEX_INCLUDE_GUARD_Calc_lexer__BUFFER__BUFFER_PRINT
+
+#include "lexical_analysis/lib/definitions"
+#include "lexical_analysis/lib/quex/enums"
+#include "lexical_analysis/lib/buffer/Buffer"
+#include "lexical_analysis/lib/buffer/lexatoms/LexatomLoader"
+#include "lexical_analysis/lib/buffer/asserts"
+
+
+
+ void  
+Calc_lexer_Buffer_print_content(Calc_lexer_Buffer* buffer);
+
+ void  
+Calc_lexer_Buffer_print_content_detailed(Calc_lexer_Buffer* buffer);
+
+ void  
+Calc_lexer_Buffer_print_content_core(const size_t   ElementSize, 
+                                     const uint8_t* Front,
+                                     const uint8_t* Back,
+                                     const uint8_t* ReadP,
+                                     const uint8_t* InputEnd,
+                                     bool           BordersF);
+
+ void
+Calc_lexer_Buffer_print_overflow_message(Calc_lexer_Buffer* buffer); 
+
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_Calc_lexer__BUFFER__BUFFER_PRINT */

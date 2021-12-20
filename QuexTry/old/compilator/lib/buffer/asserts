@@ -1,0 +1,38 @@
+/* -*- C++ -*- vim: set syntax=cpp: */
+#ifndef QUEX_INCLUDE_GUARD_compilator__BUFFER__ASSERTS
+#define QUEX_INCLUDE_GUARD_compilator__BUFFER__ASSERTS
+
+#ifndef QUEX_OPTION_ASSERTS
+
+#define compilator_BUFFER_ASSERT_INVARIANCE_SETUP(BI, ME)       /* empty */    
+#define compilator_BUFFER_ASSERT_INVARIANCE_VERIFY(BI, ME)      /* empty */    
+#define compilator_BUFFER_ASSERT_INVARIANCE_VERIFY_SAME(BI, ME) /* empty */    
+#define compilator_Buffer_assert_pointers_in_range(ME)          /* empty */
+#define compilator_Buffer_assert_consistency(ME)                /* empty */
+#define compilator_Buffer_member_functions_assert(ME)           /* empty */
+
+#else
+#include "compilator\lib\definitions"
+#include "compilator\lib\buffer/Buffer"
+
+
+
+inline void compilator_BUFFER_ASSERT_INVARIANCE_SETUP(compilator_BufferInvariance* bi, 
+                                                           compilator_Buffer*           me);
+inline void compilator_BUFFER_ASSERT_INVARIANCE_VERIFY(compilator_BufferInvariance* bi, 
+                                                            compilator_Buffer*           me);
+inline void compilator_BUFFER_ASSERT_INVARIANCE_VERIFY_SAME(compilator_BufferInvariance* bi, 
+                                                                 compilator_Buffer*           me);
+
+inline void compilator_Buffer_assert_pointers_in_range(const compilator_Buffer* B);                 
+inline void compilator_Buffer_assert_limit_codes_in_place(const compilator_Buffer* B);
+inline void compilator_Buffer_assert_consistency(const compilator_Buffer* B);                                            
+inline void compilator_Buffer_assert_no_lexatom_is_buffer_border(const compilator_lexatom_t* Begin, 
+                                                                      const compilator_lexatom_t* End);
+inline void compilator_Buffer_member_functions_assert(const compilator_Buffer* me);
+
+
+
+#endif
+
+#endif /* QUEX_INCLUDE_GUARD_compilator__BUFFER__ASSERTS */

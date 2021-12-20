@@ -1,0 +1,104 @@
+/* -*- C++ -*-  vim:set syntax=cpp: 
+ *
+ * (C) 2004-2009 Frank-Rene Schaefer
+ *
+ * QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__ACCUMULATOR may be undefined in case
+ *    that multiple lexical analyzers are used. Then, the name of the
+ *    Calc_lexer_Accumulator must be different.                               */
+#ifndef QUEX_INCLUDE_GUARD_Calc_lexer__EXTRA__ACCUMULATOR__ACCUMULATOR
+#define QUEX_INCLUDE_GUARD_Calc_lexer__EXTRA__ACCUMULATOR__ACCUMULATOR
+
+/* Initial size of memory to hold accumulated text.                           */
+#if   defined(QUEX_SETTING_ACCUMULATOR_INITIAL_SIZE_EXT)
+#   define QUEX_Calc_lexer_SETTING_ACCUMULATOR_INITIAL_SIZE QUEX_SETTING_ACCUMULATOR_INITIAL_SIZE_EXT
+#elif defined(QUEX_Calc_lexer_SETTING_ACCUMULATOR_INITIAL_SIZE_EXT)
+#   define QUEX_Calc_lexer_SETTING_ACCUMULATOR_INITIAL_SIZE QUEX_Calc_lexer_SETTING_ACCUMULATOR_INITIAL_SIZE_EXT
+#else
+#   define QUEX_Calc_lexer_SETTING_ACCUMULATOR_INITIAL_SIZE 256
+#endif
+
+/* Granularity of memory allocation:
+ * Upon overload: new memory's size = current memory's size * (1 + factor)    */
+#if   defined(QUEX_SETTING_ACCUMULATOR_GRANULARITY_FACTOR_EXT)
+#   define QUEX_Calc_lexer_SETTING_ACCUMULATOR_GRANULARITY_FACTOR QUEX_SETTING_ACCUMULATOR_GRANULARITY_FACTOR_EXT
+#elif defined(QUEX_Calc_lexer_SETTING_ACCUMULATOR_GRANULARITY_FACTOR_EXT)
+#   define QUEX_Calc_lexer_SETTING_ACCUMULATOR_GRANULARITY_FACTOR QUEX_Calc_lexer_SETTING_ACCUMULATOR_GRANULARITY_FACTOR_EXT
+#else
+#   define QUEX_Calc_lexer_SETTING_ACCUMULATOR_GRANULARITY_FACTOR 0.8
+#endif
+
+#include "lexical_analysis/lib/definitions"
+
+
+
+
+struct Calc_lexer_tag;   
+typedef struct QUEX_Calc_lexer_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT Calc_lexer_Accumulator_tag {
+
+
+       size_t  _begin_line;
+     size_t  _begin_column;
+
+    struct { 
+        Calc_lexer_lexatom_t* begin;
+        Calc_lexer_lexatom_t* end;
+        Calc_lexer_lexatom_t* memory_end;
+    }                   text;
+    struct Calc_lexer_tag* the_lexer;     
+
+
+
+    void   (*destruct)(struct Calc_lexer_Accumulator_tag* me);
+    void   (*clear)(struct Calc_lexer_Accumulator_tag* me);
+    void   (*add)(struct Calc_lexer_Accumulator_tag*  me,
+                  const Calc_lexer_lexatom_t*            Begin, 
+                  const Calc_lexer_lexatom_t*            End);
+    void   (*add_character)(struct Calc_lexer_Accumulator_tag* me,
+                            const Calc_lexer_lexatom_t            Character);
+
+    bool   (*extend)(struct Calc_lexer_Accumulator_tag* me, 
+                     size_t                             MinAddSize);
+    bool   (*flush)(struct Calc_lexer_Accumulator_tag* me, 
+                    Calc_lexer_token_id_t                 TokenID);
+    void   (*print_this)(struct Calc_lexer_Accumulator_tag* me);
+
+} Calc_lexer_Accumulator;
+
+ bool
+Calc_lexer_Accumulator_construct(Calc_lexer_Accumulator*, struct Calc_lexer_tag*);
+
+ void
+Calc_lexer_Accumulator_destruct(Calc_lexer_Accumulator* me);
+                      
+ void      
+Calc_lexer_Accumulator__clear(Calc_lexer_Accumulator* me);
+                      
+ void      
+Calc_lexer_Accumulator__add(Calc_lexer_Accumulator*  me,
+                            const Calc_lexer_lexatom_t* Begin, 
+                            const Calc_lexer_lexatom_t* End);
+                      
+ void      
+Calc_lexer_Accumulator__add_character(Calc_lexer_Accumulator*  me,
+                                      const Calc_lexer_lexatom_t  Character);
+
+ bool
+Calc_lexer_Accumulator__flush(Calc_lexer_Accumulator*   me,
+                              const Calc_lexer_token_id_t  TokenID);
+                      
+ void
+Calc_lexer_Accumulator_resources_absent_mark(Calc_lexer_Accumulator* me);
+
+ bool
+Calc_lexer_Accumulator_resources_absent(Calc_lexer_Accumulator* me);
+
+ bool
+Calc_lexer_Accumulator_init_memory(Calc_lexer_Accumulator*   me);
+
+ void      
+Calc_lexer_Accumulator_print_this(Calc_lexer_Accumulator* me);
+                      
+
+
+
+#endif /*  QUEX_INCLUDE_GUARD_Calc_lexer__EXTRA__ACCUMULATOR__ACCUMULATOR */

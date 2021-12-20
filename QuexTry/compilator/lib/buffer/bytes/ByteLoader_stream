@@ -1,0 +1,26 @@
+#ifndef  QUEX_INCLUDE_GUARD_compilator__BUFFER__BYTES__BYTE_LOADER_STREAM
+#define  QUEX_INCLUDE_GUARD_compilator__BUFFER__BYTES__BYTE_LOADER_STREAM
+#ifdef __cplusplus
+
+#include "compilator\lib\buffer/bytes/ByteLoader"
+
+
+
+template <class StreamType>
+class compilator_ByteLoader_stream { 
+public:
+    compilator_ByteLoader  base;
+    StreamType*            input_handle;
+};
+
+template <class StreamType> inline void
+compilator_ByteLoader_stream_construct(compilator_ByteLoader_stream<StreamType>* me, StreamType* sh);
+template <class StreamType> inline compilator_ByteLoader*
+compilator_ByteLoader_stream_new(StreamType* sh);
+inline compilator_ByteLoader*    
+compilator_ByteLoader_stream_new_from_file_name(const char* FileName);
+
+
+
+#endif /* __cplusplus                           */
+#endif /*  QUEX_INCLUDE_GUARD_compilator__BUFFER__BYTES__BYTE_LOADER_STREAM */

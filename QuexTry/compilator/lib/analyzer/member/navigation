@@ -1,0 +1,21 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef QUEX_INCLUDE_GUARD_compilator__ANALYZER__MEMBER__NAVIGATION
+#define QUEX_INCLUDE_GUARD_compilator__ANALYZER__MEMBER__NAVIGATION
+
+#include "compilator\lib\definitions"
+
+
+
+/* Tell/Seek/Move on basis of character index */
+inline size_t  compilator_MF_tell(compilator* me);
+inline void    compilator_MF_seek(compilator* me, const size_t);
+inline void    compilator_MF_seek_forward(compilator*  me, const size_t);
+inline void    compilator_MF_seek_backward(compilator* me, const size_t);
+inline void    compilator_MF_undo(compilator* me);
+inline void    compilator_MF_undo_n(compilator* me, size_t DeltaN_Backward);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_compilator__ANALYZER__MEMBER__NAVIGATION */

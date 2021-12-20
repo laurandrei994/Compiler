@@ -1,0 +1,25 @@
+/* -*- C++ -*-  vim: set syntax=cpp:
+ * (C) 2007-2008 Frank-Rene Schaefer  */
+#ifndef  QUEX_INCLUDE_GUARD_Calc_lexer__BUFFER__LEXATOMS__CONVERTER__ICONV__CONVERTER_ICONV
+#define  QUEX_INCLUDE_GUARD_Calc_lexer__BUFFER__LEXATOMS__CONVERTER__ICONV__CONVERTER_ICONV
+
+#include "lexical_analysis/lib/definitions"
+#include "lexical_analysis/lib/buffer/lexatoms/converter/Converter"
+#include "lexical_analysis/lib/buffer/lexatoms/converter/iconv/special_headers.h"
+
+
+
+
+typedef QUEX_Calc_lexer_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT struct {
+    Calc_lexer_Converter  base;
+
+    iconv_t               handle;
+
+} Calc_lexer_Converter_IConv;
+
+ Calc_lexer_Converter* Calc_lexer_Converter_IConv_new(const char* FromCodec, 
+                                                                 const char* ToCodec);
+
+
+
+#endif /*  QUEX_INCLUDE_GUARD_Calc_lexer__BUFFER__LEXATOMS__CONVERTER__ICONV__CONVERTER_ICONV */

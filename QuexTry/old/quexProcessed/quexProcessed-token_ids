@@ -1,0 +1,35 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * PURPOSE: File containing definition of token-identifier and
+ *          a function that maps token identifiers to a string
+ *          name.
+ *
+ * NOTE: This file has been created automatically by Quex.
+ *       Visit quex.org for further info.
+ *
+ * DATE: Thu Dec  3 09:47:48 2020
+ *
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY                                                     */
+#ifndef QUEX_INCLUDE_GUARD_quexProcessed__GENERATED_TOKEN_IDS
+#define QUEX_INCLUDE_GUARD_quexProcessed__GENERATED_TOKEN_IDS
+
+/* Note: When multiple lexical analyzers are included, then their
+ *       token prefix must differ! Use '--token-id-prefix'.                   */
+const uint32_t QUEX_TKN_BRACKET_CLOSE = ((uint32_t)10004);
+const uint32_t QUEX_TKN_BRACKET_OPEN  = ((uint32_t)10005);
+const uint32_t QUEX_TKN_DEDENT        = ((uint32_t)10000);
+const uint32_t QUEX_TKN_EXPECT        = ((uint32_t)10006);
+const uint32_t QUEX_TKN_IDENTIFIER    = ((uint32_t)10007);
+const uint32_t QUEX_TKN_INDENT        = ((uint32_t)10001);
+const uint32_t QUEX_TKN_NODENT        = ((uint32_t)10002);
+const uint32_t QUEX_TKN_NUMBER        = ((uint32_t)10008);
+const uint32_t QUEX_TKN_SEMICOLON     = ((uint32_t)10009);
+const uint32_t QUEX_TKN_SEND          = ((uint32_t)10010);
+const uint32_t QUEX_TKN_STRUCT        = ((uint32_t)10011);
+const uint32_t QUEX_TKN_TERMINATION   = ((uint32_t)0);
+const uint32_t QUEX_TKN_TYPE_DOUBLE   = ((uint32_t)10012);
+const uint32_t QUEX_TKN_TYPE_INT      = ((uint32_t)10013);
+const uint32_t QUEX_TKN_UNINITIALIZED = ((uint32_t)10003);
+
+
+#endif /* QUEX_INCLUDE_GUARD_quexProcessed__GENERATED_TOKEN_IDS */

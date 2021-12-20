@@ -1,0 +1,52 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ *
+ * Important:
+ *                  RESET != DESTRUCTOR + CONSTRUCTOR
+ *
+ * because DESTRUCTOR and CONSTRUCTOR may involve resource de-allocation and
+ * resource re-allocation. Reset, instead may work on existing resources.
+ *
+ * (C) 2005-2017 Frank-Rene Schaefer
+ *
+ * ABSOLUTELY NO WARRANTY                                                    */
+#ifndef QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__STRUCT__RESET
+#define QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__STRUCT__RESET
+
+#include "quexProcessed/lib/definitions"
+
+ 
+
+/* The constructor 'core' function is implemented per analyzer.
+ * It's implementation happens inside the generated source file.             */
+
+/* Level (0) __________________________________________________________________
+ *                                                                           */
+inline bool quexProcessed_MF_reset(quexProcessed* me);
+
+/* Level (1) __________________________________________________________________
+ *                                                                           */
+inline bool quexProcessed_MF_reset_file_name(quexProcessed*   me,
+                                               const char*           Filename, 
+                                               quexProcessed_Converter* converter);
+
+/* Level (3) __________________________________________________________________
+ *                                                                           */
+inline bool quexProcessed_MF_reset_ByteLoader(quexProcessed*    me,
+                                                quexProcessed_ByteLoader* byte_loader,
+                                                quexProcessed_Converter*  converter);
+
+/* Level (5) __________________________________________________________________
+ *                                                                           */
+inline bool quexProcessed_MF_reset_memory(quexProcessed* me,
+                                            quexProcessed_lexatom_t*  BufferMemoryBegin, 
+                                            size_t              BufferMemorySize,
+                                            quexProcessed_lexatom_t*  BufferEndOfFileP); 
+
+/* Basic constructions ________________________________________________________
+ *                                                                           */
+inline bool quexProcessed_MF_reset_all_but_buffer(quexProcessed* me);
+extern      bool quexProcessed_user_reset(quexProcessed* me);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__STRUCT__RESET */

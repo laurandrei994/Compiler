@@ -1,0 +1,64 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2016 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY                                                    */
+#ifndef QUEX_INCLUDE_GUARD_compilator__ANALYZER__MEMBER__MISC
+#define QUEX_INCLUDE_GUARD_compilator__ANALYZER__MEMBER__MISC
+
+#include "compilator\lib\definitions"
+
+
+
+
+
+inline void        compilator_MF_error_code_clear(compilator* me);
+inline bool        compilator_MF_error_code_is_void(compilator* me);
+inline void        compilator_MF_error_code_set_void(compilator* me);
+inline void        compilator_MF_error_code_set_if_first(compilator* me, E_Error ErrorCode);
+
+/* Activate/deactivate byte order reversion (big-/little-endian) */
+inline bool        compilator_MF_byte_order_reversion(compilator* me);
+inline void        compilator_MF_byte_order_reversion_set(compilator* me,
+                                                            bool                Value);
+/* Version information */
+inline const char* compilator_MF_version(compilator* me); 
+
+inline compilator_Token*  compilator_MF_token_p(compilator* me);
+inline void              compilator_MF_send(compilator* me, 
+                                                 compilator_token_id_t  Id);
+inline void              compilator_MF_send_n(compilator* me, 
+                                                   compilator_token_id_t  Id, 
+                                                   size_t              RepetitionN);
+inline bool              compilator_MF_send_text(compilator* me, 
+                                                      compilator_token_id_t  Id,
+                                                      compilator_lexatom_t*  BeginP, 
+                                                      compilator_lexatom_t*  EndP);
+inline bool              compilator_MF_send_string(compilator* me,
+                                                        compilator_token_id_t  Id,
+                                                        compilator_lexatom_t*  ZeroTerminatedString);
+
+inline const char*
+                 compilator_MF_input_name(compilator* me);
+inline bool compilator_MF_input_name_set(compilator* me, 
+                                              const char*         InputNameP);
+/* Print */
+inline void    compilator_MF_print_this(compilator* me);
+extern      void    compilator_user_print(compilator* me);
+
+
+inline size_t compilator_MF_line_number(const compilator* me);
+inline size_t compilator_MF_line_number_at_begin(const compilator* me);
+inline size_t compilator_MF_line_number_at_end(const compilator* me);
+inline void   compilator_MF_line_number_set(compilator* me, size_t Y);
+
+
+inline size_t compilator_MF_column_number(const compilator* me);
+inline size_t compilator_MF_column_number_at_begin(const compilator* me);
+inline size_t compilator_MF_column_number_at_end(const compilator* me);
+inline void   compilator_MF_column_number_set(compilator* me, size_t X);
+
+
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_compilator__ANALYZER__MEMBER__MISC */
+

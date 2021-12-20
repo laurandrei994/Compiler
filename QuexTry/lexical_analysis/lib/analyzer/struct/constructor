@@ -1,0 +1,48 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef  QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__STRUCT__CONSTRUCTOR
+#define  QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__STRUCT__CONSTRUCTOR
+
+#include "lexical_analysis/lib/definitions"
+#include "lexical_analysis/lib/buffer/Buffer"
+
+ 
+
+ void Calc_lexer_from_file_name(
+                                  struct Calc_lexer_tag*     me,
+                                  const char*             Filename, 
+                                  Calc_lexer_Converter*   converter);
+
+ void Calc_lexer_from_ByteLoader(
+                                  struct Calc_lexer_tag*     me,
+                                  Calc_lexer_ByteLoader*  byte_loader,
+                                  Calc_lexer_Converter*   converter);
+
+ void Calc_lexer_from_memory(
+                                  struct Calc_lexer_tag* me,
+                                  Calc_lexer_lexatom_t*  BufferMemoryBegin, 
+                                  size_t              BufferMemorySize,
+                                  Calc_lexer_lexatom_t*  BufferEndOfFileP); 
+
+/* Basic constructions ________________________________________________________
+ *                                                                           */
+ bool Calc_lexer_construct_all_but_buffer(struct Calc_lexer_tag* me, 
+                                                     bool                CallUserConstructorF);
+ void Calc_lexer_destruct(struct Calc_lexer_tag* me); 
+ void Calc_lexer_destruct_all_but_buffer(struct Calc_lexer_tag* me);
+ void Calc_lexer_all_but_buffer_resources_absent_mark(struct Calc_lexer_tag* me);
+
+ void Calc_lexer_MF_collect_user_memory(struct Calc_lexer_tag* me, 
+                                                   Calc_lexer_lexatom_t** user_buffer_memory_p);
+ bool Calc_lexer_MF_resources_absent(struct Calc_lexer_tag* me);
+ void Calc_lexer_MF_resources_absent_mark(struct Calc_lexer_tag* me);
+
+
+extern      bool Calc_lexer_user_constructor(struct Calc_lexer_tag*);
+extern      void Calc_lexer_user_destructor(struct Calc_lexer_tag*);
+
+ 
+
+#endif /*  QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__STRUCT__CONSTRUCTOR */
+

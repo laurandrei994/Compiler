@@ -1,0 +1,30 @@
+#ifndef  QUEX_INCLUDE_GUARD_Calc_lexer__BUFFER__BYTES__BYTE_LOADER_POSIX
+#define  QUEX_INCLUDE_GUARD_Calc_lexer__BUFFER__BYTES__BYTE_LOADER_POSIX
+
+#include "lexical_analysis/lib/buffer/bytes/ByteLoader"
+
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <fcntl.h>  /* POSIX file handling. */
+#include <unistd.h> /* POSIX file handling. */
+
+#ifdef __cplusplus
+}
+#endif
+
+typedef struct QUEX_Calc_lexer_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT { 
+    Calc_lexer_ByteLoader  base;
+    int                    fd;
+} Calc_lexer_ByteLoader_POSIX;
+
+ Calc_lexer_ByteLoader*    Calc_lexer_ByteLoader_POSIX_new(int fd);
+ Calc_lexer_ByteLoader*    Calc_lexer_ByteLoader_POSIX_new_from_file_name(const char*);
+
+
+
+#endif /*  QUEX_INCLUDE_GUARD_Calc_lexer__BUFFER__BYTES__BYTE_LOADER_POSIX */
+

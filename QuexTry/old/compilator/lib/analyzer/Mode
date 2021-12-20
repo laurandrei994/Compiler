@@ -1,0 +1,62 @@
+/* -*- C++ -*-  vim:set syntax=cpp: 
+ *
+ * (C) 2004-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef QUEX_INCLUDE_GUARD_compilator__ANALYZER__MODE
+#define QUEX_INCLUDE_GUARD_compilator__ANALYZER__MODE
+
+#include "compilator\lib\definitions"
+#include "compilator\lib\buffer/Buffer"
+
+
+    
+ class compilator;
+
+
+typedef struct QUEX_compilator_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT compilator_Mode_tag {  
+    const char* name;
+
+
+    void (*on_entry)(compilator*, const struct compilator_Mode_tag* FromMode);
+    void (*on_exit)(compilator*, const struct compilator_Mode_tag* ToMode);
+#   ifdef QUEX_OPTION_ASSERTS
+    bool (*has_base)(const struct compilator_Mode_tag* Mode);
+    bool (*has_entry_from)(const struct compilator_Mode_tag* Mode);
+    bool (*has_exit_to)(const struct compilator_Mode_tag* Mode);
+#   endif
+
+    compilator_Buffer_event_callbacks buffer_callbacks;
+
+    /* Choose the analyzer function to be the last, because it has a unique
+     * signature. The function pointers are assigned in a table. If the 
+     * content of this class changes, any mismatch of pointers is likely
+     * to trigger a compilation error, thus signalling that the setup is
+     * incorrect.                                                        */
+    compilator_AnalyzerFunctionP      analyzer_function;
+} compilator_Mode;
+
+inline void
+compilator_Mode_uncallable_analyzer_function(compilator*);
+
+
+
+inline void
+compilator_Mode_on_entry_exit_null_function(compilator*, const compilator_Mode*);
+
+typedef struct QUEX_compilator_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT {
+    const compilator_Mode** begin;
+    const compilator_Mode** end;
+    const compilator_Mode** memory_end;
+} compilator_ModeStack;
+
+inline bool  compilator_ModeStack_construct(compilator_ModeStack* me,
+                                                 const size_t          N);
+inline void  compilator_ModeStack_destruct(compilator_ModeStack* me);
+inline void  compilator_ModeStack_resources_absent_mark(compilator_ModeStack* me);
+inline bool  compilator_ModeStack_resources_absent(compilator_ModeStack* me);
+inline void  compilator_ModeStack_print(compilator_ModeStack* me);
+
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_compilator__ANALYZER__QUEX_MODE */

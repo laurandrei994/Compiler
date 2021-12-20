@@ -1,0 +1,21 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__MEMBER__NAVIGATION
+#define QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__MEMBER__NAVIGATION
+
+#include "lexical_analysis/lib/definitions"
+
+
+
+/* Tell/Seek/Move on basis of character index */
+ size_t  Calc_lexer_MF_tell(struct Calc_lexer_tag* me);
+ void    Calc_lexer_MF_seek(struct Calc_lexer_tag* me, const size_t);
+ void    Calc_lexer_MF_seek_forward(struct Calc_lexer_tag*  me, const size_t);
+ void    Calc_lexer_MF_seek_backward(struct Calc_lexer_tag* me, const size_t);
+ void    Calc_lexer_MF_undo(struct Calc_lexer_tag* me);
+ void    Calc_lexer_MF_undo_n(struct Calc_lexer_tag* me, size_t DeltaN_Backward);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__MEMBER__NAVIGATION */

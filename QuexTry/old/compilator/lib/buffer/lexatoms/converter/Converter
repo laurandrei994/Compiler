@@ -1,0 +1,122 @@
+/* -*- C++ -*-  vim: set syntax=cpp:
+ * (C) 2007-2016 Frank-Rene Schaefer  */
+#ifndef  QUEX_INCLUDE_GUARD_compilator__BUFFER__LEXATOMS__CONVERTER__CONVERTER
+#define  QUEX_INCLUDE_GUARD_compilator__BUFFER__LEXATOMS__CONVERTER__CONVERTER
+
+#include "compilator\lib\definitions"
+#include "compilator\lib\quex/MemoryManager"
+#include "compilator\lib\quex/bom"
+
+
+
+typedef struct QUEX_compilator_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT compilator_Converter_tag {
+    E_LoadResult    (*convert)(struct compilator_Converter_tag*, 
+                               uint8_t**           source, const uint8_t*           SourceEnd, 
+                               compilator_lexatom_t** drain,  const compilator_lexatom_t* DrainEnd);
+
+    /* Tries to convert all lexatoms given in 'source' with the coding
+     * specified earlier to _open(...). 'source' and 'drain' are passed as
+     * pointers to pointers so that the pointers can be changed. This way the
+     * converter can inform the user about the state of conversion from source
+     * to drain buffer.
+     *
+     * BEFORE:         *source              SourceEnd
+     *                 |                    |
+     *          [      .....................]   source buffer
+     *
+     *               *drain         DrainEnd
+     *               |              |
+     *          [....               ] drain buffer
+     *
+     *       At the beginning, 'source' points to the first lexatom to be
+     *       converted. 'drain' points to the place where the first converted
+     *       lexatom is to be written to.
+     *  
+     * AFTER:                          *source                              
+     *                                 |     
+     *          [                      .....]   source buffer
+     *
+     *                        *drain 
+     *                        |      
+     *          [.............      ] drain buffer
+     *
+     *       After conversion, 'source' points immediately behind the last 
+     *       lexatom that was subject to conversion. 'drain' points behind the
+     *       last lexatom that resulted from the conversion. 
+     *  
+     * RETURNS:  true  --> Drain buffer is filled as much as possible with 
+     *                     converted lexatoms.
+     *           false --> More source bytes are needed to fill drain buffer. */
+
+    ptrdiff_t (*stomach_byte_n)(struct compilator_Converter_tag*);
+    void      (*stomach_clear)(struct compilator_Converter_tag*);
+    /* [OPTIONAL] can be set to '0x0'. 
+     *
+     * This function is called whenever a conversion discontinuity appears.
+     * Such cases appear only when the user navigates through the input
+     * stream (seek_lexatom_index(...)), or with long pre-conditions when
+     * the buffer size is exceeded. 
+     *
+     * For 'normal' converters this function can be set to '0x0'. If a converter
+     * has an internal 'statefulness' that is difficult to be tamed, then use
+     * this function to reset the converter. Actually, the initial reason
+     * for introducing the function pointer was the strange behavior of the 
+     * ICU Converters of IBM(R).                                              */
+
+    bool    (*initialize)(struct compilator_Converter_tag*, 
+                          const char* FromCodingName, 
+                          const char* ToCodingName);
+    /* Allows a 'delayed' initialization. E.g., if 'initialize_by_bom_id()' 
+     * failed, a default 'FromCodingName' may be applied.                     */
+
+    bool    (*initialize_by_bom_id)(struct compilator_Converter_tag* me,
+                                    E_ByteOrderMark                    BomId);
+    /* Initializes the converter according the given BomId. An error during is 
+     * reported as 'false'.                                                   */
+
+    void    (*print_this)(struct compilator_Converter_tag*);
+    /* Prints current state of 'this' converter.                              */
+
+    void    (*delete_self)(struct compilator_Converter_tag*);
+    /* Closes the conversion handle produced with initialize(...).      
+     * Deletes the object of the derived class.                               */
+
+    int     byte_n_per_lexatom;
+
+    /* Some encodings (such as UTF-8) occupy different number of bytes for
+     * different lexatoms. Others, such as ASCII or UCS-4 use the same number
+     * of bytes for all lexatoms of the lexatom set. Using the flag, the buffer
+     * filler can adapt the seek algorithm for navigation in the lexatom
+     * stream.                                                                */
+
+    int     input_code_unit_size;                      /* -1 => undetermined. */
+    /* Converters convert input streams of a specific codec. Examples: The 
+     * 'code unit' of UTF8 is a byte, the code unit of UTF16 is 2byte.        */
+
+    bool    virginity_f;
+
+} compilator_Converter;
+
+inline bool compilator_Converter_construct(compilator_Converter* me,
+                                                const char*  FromCodec, const char* ToCodec,
+                                                bool         (*initialize)(compilator_Converter*, 
+                                                                           const char* FromCodingName, 
+                                                                           const char* ToCodingName),  
+                                                bool         (*initialize_by_bom_id)(compilator_Converter*, 
+                                                                                     E_ByteOrderMark),
+                                                E_LoadResult (*convert)(compilator_Converter*, 
+                                                                        uint8_t**           source, 
+                                                                        const uint8_t*      SourceEnd, 
+                                                                        compilator_lexatom_t** drain,  
+                                                                        const compilator_lexatom_t* DrainEnd),
+                                                void         (*delete_self)(compilator_Converter*),
+                                                ptrdiff_t    (*stomach_byte_n)(compilator_Converter*),
+                                                void         (*stomach_clear)(compilator_Converter*),
+                                                void         (*print_this)(compilator_Converter*));
+
+inline void compilator_Converter_reset(compilator_Converter* me);
+inline void compilator_Converter_print_this(compilator_Converter* me);
+
+
+
+#endif /*  QUEX_INCLUDE_GUARD_compilator__BUFFER__LEXATOMS__CONVERTER__CONVERTER */

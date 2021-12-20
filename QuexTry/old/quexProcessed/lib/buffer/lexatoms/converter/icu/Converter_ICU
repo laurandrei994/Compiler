@@ -1,0 +1,41 @@
+/* -*- C++ -*- vim: set syntax=cpp: 
+ * (C) 2009 Frank-Rene Schaefer
+ * NO WARRANTY */
+#ifndef  QUEX_INCLUDE_GUARD_quexProcessed__BUFFER__LEXATOMS__CONVERTER__ICU__CONVERTER_ICU
+#define  QUEX_INCLUDE_GUARD_quexProcessed__BUFFER__LEXATOMS__CONVERTER__ICU__CONVERTER_ICU
+
+#include "quexProcessed/lib/definitions"
+#include "quexProcessed/lib/buffer/lexatoms/converter/Converter"
+#include "quexProcessed/lib/buffer/lexatoms/converter/icu/special_headers.h"
+
+#if  defined(QUEX_quexProcessed_SETTING_ICU_PIVOT_BUFFER_SIZE_EXT)
+#    define QUEX_quexProcessed_SETTING_ICU_PIVOT_BUFFER_SIZE  QUEX_quexProcessed_SETTING_ICU_PIVOT_BUFFER_SIZE_EXT
+#else
+#    define QUEX_quexProcessed_SETTING_ICU_PIVOT_BUFFER_SIZE                               (64)
+#endif
+
+
+
+    typedef struct QUEX_quexProcessed_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT {
+        quexProcessed_Converter  base;
+
+        UConverter*  from_handle;
+        UConverter*  to_handle;
+        UErrorCode   status;
+
+        UBool        reset_upon_next_conversion_f;
+
+        struct {
+            UChar    buffer[QUEX_quexProcessed_SETTING_ICU_PIVOT_BUFFER_SIZE];
+            UChar*   source;
+            UChar*   target;
+        } pivot;
+
+    } quexProcessed_Converter_ICU;
+
+    inline quexProcessed_Converter* quexProcessed_Converter_ICU_new(const char* FromCodec, 
+                                                                   const char* ToCodec);
+
+
+
+#endif /*  QUEX_INCLUDE_GUARD_quexProcessed__BUFFER__LEXATOMS__CONVERTER__ICU__CONVERTER_ICU */

@@ -1,0 +1,56 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef QUEX_INCLUDE_GUARD_compilator__ANALYZER__STRUCT__INCLUDE_STACK
+#define QUEX_INCLUDE_GUARD_compilator__ANALYZER__STRUCT__INCLUDE_STACK
+
+#include "compilator\lib\definitions"
+
+ 
+
+/* The constructor 'core' function is implemented per analyzer.
+ * It's implementation happens inside the generated source file.             */
+
+/* Level (1) __________________________________________________________________
+ *                                                                           */
+inline bool compilator_MF_include_push_file_name(compilator*   me,
+                                                   const char*           Filename, 
+                                                   compilator_Converter* converter);
+
+/* Level (3) __________________________________________________________________
+ *                                                                           */
+inline bool compilator_MF_include_push_ByteLoader(
+                           compilator*    me,
+                           const char*            InputName,
+                           compilator_ByteLoader* byte_loader,
+                           compilator_Converter*  converter);
+
+/* Level (5) __________________________________________________________________
+ *                                                                           */
+inline bool compilator_MF_include_push_memory(
+                           compilator*  me,
+                           const char*          InputName,
+                           compilator_lexatom_t*   BufferMemoryBegin, 
+                           size_t               BufferMemorySize,
+                           compilator_lexatom_t*   BufferEndOfFileP); 
+
+/* Basic constructions ________________________________________________________
+ *                                                                           */
+inline bool   compilator_MF_include_push_core(compilator*       me,
+                                                const char*               InputNameP,
+                                                compilator_Buffer*        new_buffer,
+                                                compilator_LexatomLoader* new_filler);
+inline bool   compilator_MF_include_pop(compilator* me);
+inline void   compilator_MF_include_stack_delete(compilator* me);
+inline bool   compilator_MF_include_detect_recursion(compilator* me,
+                                                       const char*         InputName);
+
+extern bool        compilator_user_memento_pack(compilator* me, 
+                                                const char*         InputName,
+                                                compilator_Memento* memento);
+extern void        compilator_user_memento_unpack(compilator* me, 
+                                                  compilator_Memento* memento);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_compilator__ANALYZER__STRUCT__INCLUDE_STACK */

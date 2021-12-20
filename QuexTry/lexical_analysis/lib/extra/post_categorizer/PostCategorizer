@@ -1,0 +1,65 @@
+/* -*- C++ -*-   vim:set syntax=cpp:
+ * QUEX_INCLUDE_GUARD_Calc_lexer__ANALYZER__POST_CATEGORIZER may be undefined in case
+ *    that multiple lexical analyzers are used.                                       */
+#ifndef QUEX_INCLUDE_GUARD_Calc_lexer__EXTRA__POST_CATEGORIZER__POST_CATEGORIZER
+#define QUEX_INCLUDE_GUARD_Calc_lexer__EXTRA__POST_CATEGORIZER__POST_CATEGORIZER
+
+
+
+/*________________________________________________________________________________
+ * Post Categorization of Lexemes:
+ *
+ * The implementation of the categorization tree is a little more efficient
+ * than the STL map, since we do not iterator over the content.
+ *________________________________________________________________________________*/
+typedef struct QUEX_Calc_lexer_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT Calc_lexer_DictionaryNode_tag {
+    /* Store the first character separately from the remainder. This might
+     * help to avoid loading 'remotely allocated' strings into the cache if
+     * they do not fit anyway (because of their first character).                 */ 
+    Calc_lexer_lexatom_t          name_first_character;
+    const Calc_lexer_lexatom_t*   name_remainder;
+
+    Calc_lexer_token_id_t           token_id;
+
+    struct Calc_lexer_DictionaryNode_tag*   lesser;
+    struct Calc_lexer_DictionaryNode_tag*   greater;
+
+} Calc_lexer_DictionaryNode;
+
+
+    typedef struct QUEX_Calc_lexer_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT Calc_lexer_Dictionary_tag {
+        Calc_lexer_DictionaryNode*  root;
+
+        void                (*enter)(struct Calc_lexer_Dictionary_tag* me,
+                                     const Calc_lexer_lexatom_t*          Lexeme, 
+                                     const Calc_lexer_token_id_t          TokenID);
+        void                (*remove)(struct Calc_lexer_Dictionary_tag* me,
+                                      const Calc_lexer_lexatom_t*          Lexeme);
+        Calc_lexer_token_id_t  (*get_token_id)(const struct Calc_lexer_Dictionary_tag* me,
+                                            const Calc_lexer_lexatom_t*                Lexeme);
+        void                (*clear)(struct Calc_lexer_Dictionary_tag* me);
+        void                (*print_this)(struct Calc_lexer_Dictionary_tag* me);
+        void                (*destruct_self)(struct Calc_lexer_Dictionary_tag* me);
+
+    } Calc_lexer_Dictionary;
+
+
+
+ bool
+Calc_lexer_PostCategorizer_construct(Calc_lexer_Dictionary* me);
+
+ void
+Calc_lexer_PostCategorizer_destruct(Calc_lexer_Dictionary* me);
+
+ void
+Calc_lexer_PostCategorizer_resources_absent_mark(Calc_lexer_Dictionary* me);
+
+ bool
+Calc_lexer_PostCategorizer_resources_absent(Calc_lexer_Dictionary* me);
+
+ void          
+Calc_lexer_PostCategorizer_print_this(Calc_lexer_Dictionary* me);
+                          
+
+
+#endif /* QUEX_INCLUDE_GUARD_Calc_lexer__EXTRA__POST_CATEGORIZER__POSTCATEGORIZER */

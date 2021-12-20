@@ -1,0 +1,27 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef QUEX_INCLUDE_GUARD_compilator__ANALYZER__MEMBER__MODE_HANDLING
+#define QUEX_INCLUDE_GUARD_compilator__ANALYZER__MEMBER__MODE_HANDLING
+
+#include "compilator\lib\definitions"
+#include "compilator\lib\analyzer/Mode"
+
+
+
+/* Read Access */
+inline const compilator_Mode*   compilator_MF_mode(compilator* me);
+inline void               compilator_MF_set_mode_brutally(compilator*     me,
+                                                               const compilator_Mode*  Mode);
+inline void               compilator_MF_enter_mode(compilator*    me,
+                                                        const compilator_Mode* TargetMode);
+
+/* Changing Modes with stack */ 
+inline void        compilator_MF_pop_mode(compilator* me);
+inline void        compilator_MF_pop_drop_mode(compilator* me);
+inline void        compilator_MF_push_mode(compilator* me, compilator_Mode* new_mode);
+  
+
+
+#endif /* QUEX_INCLUDE_GUARD_compilator__ANALYZER__MEMBER__MODE_HANDLING */
+

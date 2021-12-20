@@ -1,0 +1,27 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__MEMBER__MODE_HANDLING
+#define QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__MEMBER__MODE_HANDLING
+
+#include "quexProcessed/lib/definitions"
+#include "quexProcessed/lib/analyzer/Mode"
+
+
+
+/* Read Access */
+inline const quexProcessed_Mode*   quexProcessed_MF_mode(quexProcessed* me);
+inline void               quexProcessed_MF_set_mode_brutally(quexProcessed*     me,
+                                                               const quexProcessed_Mode*  Mode);
+inline void               quexProcessed_MF_enter_mode(quexProcessed*    me,
+                                                        const quexProcessed_Mode* TargetMode);
+
+/* Changing Modes with stack */ 
+inline void        quexProcessed_MF_pop_mode(quexProcessed* me);
+inline void        quexProcessed_MF_pop_drop_mode(quexProcessed* me);
+inline void        quexProcessed_MF_push_mode(quexProcessed* me, quexProcessed_Mode* new_mode);
+  
+
+
+#endif /* QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__MEMBER__MODE_HANDLING */
+

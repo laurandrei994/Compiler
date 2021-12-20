@@ -1,0 +1,44 @@
+/* -*- C++ -*-   vim:set syntax=cpp:
+ * 
+ * PURPOSE: Gavaging -- Running lexical analysis based on content that is fed
+ *                      via direct access to the analyzer's internal buffer.
+ *
+ * See file 'Gavager.i' for detailed description.
+ * 
+ * (C) 2016 Frank-Rene Schaefer.                                             */
+#ifndef QUEX_INCLUDE_GUARD_compilator__ANALYZER__ADAPTORS__GAVAGER
+#define QUEX_INCLUDE_GUARD_compilator__ANALYZER__ADAPTORS__GAVAGER
+
+#include "compilator\lib\analyzer/adaptors/Feeder"
+
+
+
+
+struct QUEX_compilator_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT compilator_Gavager {
+    compilator_FeederBase  base;
+
+public:
+    compilator_Gavager(compilator*, compilator_token_id_t);
+    bool              access(void**       begin_p, 
+                             const void** end_p);
+    bool              gavage(ptrdiff_t    ReceivedN);
+    compilator_Token*  deliver();
+};
+
+
+
+
+inline void  compilator_Gavager_construct(compilator_Gavager*  me, 
+                                               compilator*  lexer,
+                                               compilator_token_id_t   StreamTerminatingTokenId);
+inline bool  compilator_Gavager_access(compilator_Gavager* me,
+                                            void**              begin_p, 
+                                            const void**        end_p);
+inline bool  compilator_Gavager_gavage(compilator_Gavager* me, 
+                                            ptrdiff_t           ReceivedN);
+inline compilator_Token*  
+                  compilator_Gavager_deliver(compilator_Gavager* me);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_compilator__ANALYZER__ADAPTORS__GAVAGER */

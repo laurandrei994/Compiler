@@ -1,0 +1,45 @@
+/* -*- C++ -*-   vim: set syntax=cpp:
+ * (C) Frank-Rene Schaefer                               */
+#ifndef QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__COUNTER
+#define QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__COUNTER
+
+ #include <cstddef>
+
+
+#include "quexProcessed/lib/definitions"
+
+
+
+
+
+typedef struct QUEX_quexProcessed_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT {
+    
+    size_t  _line_number_at_begin;    /* line where current pattern starts   */
+    size_t  _line_number_at_end;      /* line after current pattern          */
+    
+    
+    size_t  _column_number_at_begin;  /* column where current pattern starts */
+    size_t  _column_number_at_end;    /* column after current pattern        */
+    
+    
+} quexProcessed_Counter;
+
+
+inline bool  quexProcessed_Counter_construct(quexProcessed_Counter*  me); 
+inline void  quexProcessed_Counter_copy_construct(quexProcessed_Counter*      me, 
+                                                    const quexProcessed_Counter* That);
+inline void  quexProcessed_Counter_resources_absent_mark(quexProcessed_Counter* me);
+inline bool  quexProcessed_Counter_resources_absent(quexProcessed_Counter* me);
+
+inline void  quexProcessed_Counter_print_this(quexProcessed_Counter* me);
+
+#if ! defined(QUEX_OPTION_ASSERTS)
+#   define        quexProcessed_Counter_assert_consistency(ME) /* empty */
+#else
+inline void  quexProcessed_Counter_assert_consistency(quexProcessed_Counter* counter);
+#endif
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__COUNTER */
+

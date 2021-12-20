@@ -1,0 +1,48 @@
+/* -*- C++ -*- vim: set syntax=cpp:
+ * (C) 2005-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef  QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__STRUCT__CONSTRUCTOR
+#define  QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__STRUCT__CONSTRUCTOR
+
+#include "quexProcessed/lib/definitions"
+#include "quexProcessed/lib/buffer/Buffer"
+
+ 
+
+inline void quexProcessed_from_file_name(
+                                  quexProcessed*     me,
+                                  const char*             Filename, 
+                                  quexProcessed_Converter*   converter);
+
+inline void quexProcessed_from_ByteLoader(
+                                  quexProcessed*     me,
+                                  quexProcessed_ByteLoader*  byte_loader,
+                                  quexProcessed_Converter*   converter);
+
+inline void quexProcessed_from_memory(
+                                  quexProcessed* me,
+                                  quexProcessed_lexatom_t*  BufferMemoryBegin, 
+                                  size_t              BufferMemorySize,
+                                  quexProcessed_lexatom_t*  BufferEndOfFileP); 
+
+/* Basic constructions ________________________________________________________
+ *                                                                           */
+inline bool quexProcessed_construct_all_but_buffer(quexProcessed* me, 
+                                                     bool                CallUserConstructorF);
+inline void quexProcessed_destruct(quexProcessed* me); 
+inline void quexProcessed_destruct_all_but_buffer(quexProcessed* me);
+inline void quexProcessed_all_but_buffer_resources_absent_mark(quexProcessed* me);
+
+inline void quexProcessed_MF_collect_user_memory(quexProcessed* me, 
+                                                   quexProcessed_lexatom_t** user_buffer_memory_p);
+inline bool quexProcessed_MF_resources_absent(quexProcessed* me);
+inline void quexProcessed_MF_resources_absent_mark(quexProcessed* me);
+
+
+extern      bool quexProcessed_user_constructor(quexProcessed*);
+extern      void quexProcessed_user_destructor(quexProcessed*);
+
+ 
+
+#endif /*  QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__STRUCT__CONSTRUCTOR */
+

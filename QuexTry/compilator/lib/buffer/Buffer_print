@@ -1,0 +1,35 @@
+/* -*- C++ -*-  vim: set syntax=cpp:
+ *
+ * (C) 2008 Frank-Rene Schaefer */
+#ifndef QUEX_INCLUDE_GUARD_compilator__BUFFER__BUFFER_PRINT
+#define QUEX_INCLUDE_GUARD_compilator__BUFFER__BUFFER_PRINT
+
+#include "compilator\lib\definitions"
+#include "compilator\lib\quex/enums"
+#include "compilator\lib\buffer/Buffer"
+#include "compilator\lib\buffer/lexatoms/LexatomLoader"
+#include "compilator\lib\buffer/asserts"
+
+
+
+inline void  
+compilator_Buffer_print_content(compilator_Buffer* buffer);
+
+inline void  
+compilator_Buffer_print_content_detailed(compilator_Buffer* buffer);
+
+inline void  
+compilator_Buffer_print_content_core(const size_t   ElementSize, 
+                                     const uint8_t* Front,
+                                     const uint8_t* Back,
+                                     const uint8_t* ReadP,
+                                     const uint8_t* InputEnd,
+                                     bool           BordersF);
+
+inline void
+compilator_Buffer_print_overflow_message(compilator_Buffer* buffer); 
+
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_compilator__BUFFER__BUFFER_PRINT */

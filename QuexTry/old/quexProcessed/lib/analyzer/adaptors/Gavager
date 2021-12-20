@@ -1,0 +1,44 @@
+/* -*- C++ -*-   vim:set syntax=cpp:
+ * 
+ * PURPOSE: Gavaging -- Running lexical analysis based on content that is fed
+ *                      via direct access to the analyzer's internal buffer.
+ *
+ * See file 'Gavager.i' for detailed description.
+ * 
+ * (C) 2016 Frank-Rene Schaefer.                                             */
+#ifndef QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__ADAPTORS__GAVAGER
+#define QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__ADAPTORS__GAVAGER
+
+#include "quexProcessed/lib/analyzer/adaptors/Feeder"
+
+
+
+
+struct QUEX_quexProcessed_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT quexProcessed_Gavager {
+    quexProcessed_FeederBase  base;
+
+public:
+    quexProcessed_Gavager(quexProcessed*, quexProcessed_token_id_t);
+    bool              access(void**       begin_p, 
+                             const void** end_p);
+    bool              gavage(ptrdiff_t    ReceivedN);
+    quexProcessed_Token*  deliver();
+};
+
+
+
+
+inline void  quexProcessed_Gavager_construct(quexProcessed_Gavager*  me, 
+                                               quexProcessed*  lexer,
+                                               quexProcessed_token_id_t   StreamTerminatingTokenId);
+inline bool  quexProcessed_Gavager_access(quexProcessed_Gavager* me,
+                                            void**              begin_p, 
+                                            const void**        end_p);
+inline bool  quexProcessed_Gavager_gavage(quexProcessed_Gavager* me, 
+                                            ptrdiff_t           ReceivedN);
+inline quexProcessed_Token*  
+                  quexProcessed_Gavager_deliver(quexProcessed_Gavager* me);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__ADAPTORS__GAVAGER */

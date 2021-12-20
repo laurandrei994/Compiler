@@ -1,0 +1,354 @@
+/* -*- C++ -*-   vim: set syntax=cpp: 
+ * (C) 2004-2009 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY
+ */
+#ifndef QUEX_INCLUDE_GUARD_compilator_Token__TOKEN__TOKEN__GENERATED
+#define QUEX_INCLUDE_GUARD_compilator_Token__TOKEN__TOKEN__GENERATED
+
+
+#   line 5 "compilator.qx"
+
+       #include <iostream>
+       #include <string>
+$INCLUDE_CONVERTER_DECLARATION
+   
+#   line 15 "compilator\compilator-token"
+
+ 
+#include "compilator\compilator-configuration"
+
+
+
+class compilator_Token;
+
+inline void         compilator_Token_construct(compilator_Token*);
+inline void         compilator_Token_copy(compilator_Token*, const compilator_Token*);
+inline void         compilator_Token_destruct(compilator_Token*);
+
+/* NOTE: Setters and getters as in the C++ version of the token class are not
+ *       necessary, since the members are accessed directly.                   */
+
+inline void         compilator_Token_set(compilator_Token*         me, 
+                                              const compilator_token_id_t ID);
+
+
+inline bool         compilator_Token_take_text(compilator_Token*            me, 
+                                                    const compilator_lexatom_t* Begin, 
+                                                    const compilator_lexatom_t* End);
+
+
+
+
+
+class QUEX_compilator_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT compilator_Token {
+public:
+    compilator_Token();
+    compilator_Token(const compilator_Token& That);
+    /* operator=(..): USE WITH CAUTION--POSSIBLE MAJOR PERFORMANCE DECREASE! 
+     *                BETTER USE __copy(That)                                */
+    compilator_Token& operator=(const compilator_Token& That);
+    ~compilator_Token();
+
+
+#   line 17 "compilator.qx"
+    std::basic_string<QUEX_TYPE_CHARACTER> text;
+#   line 55 "compilator\compilator-token"
+
+
+public:
+
+#   line 17 "compilator.qx"
+    std::basic_string<QUEX_TYPE_CHARACTER> get_text() const                                       { return text; }
+#   line 17 "compilator.qx"
+    void                                   set_text(std::basic_string<QUEX_TYPE_CHARACTER>& Value) { text = Value; }
+#   line 64 "compilator\compilator-token"
+
+    void set(const compilator_token_id_t ID) { id = ID; }
+    void set(const compilator_token_id_t ID, const std::basic_string<QUEX_TYPE_CHARACTER>& Value0)
+    { id = ID; text = Value0; }
+
+
+    public:
+        /* _line_n, _column_n, and id are public, so that the token policy 
+         * can access it. making it private would imply complications for 
+         * user customized token classes. The token policies should be the
+         * same for C and Cpp.                                               */
+        compilator_token_id_t    id;
+
+
+    public:
+        compilator_token_line_n_t    _line_n;
+        compilator_token_line_n_t    line_number() const                                 { return _line_n; }
+        void                      set_line_number(const compilator_token_line_n_t Value) { _line_n = Value; }
+
+
+    public:
+        compilator_token_column_n_t  _column_n;
+        compilator_token_column_n_t  column_number() const                                   { return _column_n; }
+        void                      set_column_number(const compilator_token_column_n_t Value) { _column_n = Value; }
+
+    public:
+#   define self (*this)
+
+#   line 35 "compilator.qx"
+
+   
+        inline bool operator==(uint32_t value)
+        {
+            return _id==value;
+        }
+        
+        inline bool operator!=(uint32_t value)
+        {
+            return _id!=value;
+        }   
+        
+        typedef std::basic_string<QUEX_TYPE_CHARACTER> __string;
+
+        operator 
+        const std::string() const
+        { return get_string(); }
+
+        const std::string
+        get_string() const 
+        {
+            std::string             tmp;
+
+            tmp = map_id_to_name(self._id);
+
+            tmp += " '" + pretty_char_text() + "' ";
+
+            return tmp;
+        }
+    
+        const std::string 
+        pretty_char_text() const
+        {
+#           if defined(__QUEX_OPTION_CONVERTER_HELPER)
+            std::string             tmp = __QUEX_CONVERTER_STRING(QUEX_compilator_SETTING_CODEC, char)(self.text);
+#           else
+            /* Converter helpers are only disabled automatically, if ASCII (Unicode in 0-FF)
+             * is used and the character size is 1.                                          */
+            __quex_assert(sizeof(QUEX_TYPE_CHARACTER) == 1);
+            std::string             tmp((const char*)self.text.c_str());
+#           endif
+            std::string::size_type  pos = 0;
+
+            while( (pos = tmp.find("\n") ) != __string::npos ) tmp.replace(pos, (size_t)1, "\\n");
+            while( (pos = tmp.find("\t") ) != __string::npos ) tmp.replace(pos, (size_t)1, "\\t");
+            while( (pos = tmp.find("\r") ) != __string::npos ) tmp.replace(pos, (size_t)1, "\\r");
+
+            return tmp;
+        }
+
+#       if ! defined(__QUEX_OPTION_WCHAR_T_DISABLED)
+        const std::wstring 
+        pretty_wchar_text() const
+        {
+#           if defined(__QUEX_OPTION_CONVERTER_HELPER)
+            std::wstring             tmp = __QUEX_CONVERTER_STRING(QUEX_compilator_SETTING_CODEC, wchar)(self.text);
+#           else
+            /* Converter helpers are only disabled automatically, if ASCII (Unicode in 0-FF)
+             * is used and the character size is 1.                                          */
+            __quex_assert(sizeof(QUEX_TYPE_CHARACTER) == 1);
+            std::wstring             tmp;
+            for(std::basic_string<QUEX_TYPE_CHARACTER>::const_iterator it = self.text.begin(); 
+                it != self.text.end(); ++it) {
+                tmp += (wchar_t)*it;
+            }
+#           endif
+            std::wstring::size_type  pos = 0;
+
+            while( (pos = tmp.find(L"\n") ) != __string::npos ) tmp.replace(pos, (size_t)1, L"\\n");
+            while( (pos = tmp.find(L"\t") ) != __string::npos ) tmp.replace(pos, (size_t)1, L"\\t");
+            while( (pos = tmp.find(L"\r") ) != __string::npos ) tmp.replace(pos, (size_t)1, L"\\r");
+
+            return tmp;
+        }
+#       endif
+   
+#   line 170 "compilator\compilator-token"
+
+#   undef  self
+
+    private:
+        friend void compilator_Token_copy(compilator_Token*       __this, 
+                                         const compilator_Token* That);
+        friend bool compilator_Token_take_text(compilator_Token*             __this, 
+                                              const compilator_lexatom_t*  Begin, 
+                                              const compilator_lexatom_t*  End);
+};
+
+
+
+
+#   line 153 "compilator.qx"
+
+        inline std::ostream&
+        operator<<(std::ostream& ostr, const compilator_Token& Tok)
+        { ostr << std::string(Tok); return ostr; }
+        
+
+   
+#   line 193 "compilator\compilator-token"
+
+
+
+
+extern compilator_lexatom_t compilator_LexemeNull;
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_compilator_Token__TOKEN__TOKEN__GENERATED */
+
+/* This content is pasted into header, so the include guard is superfluous. 
+ * It is left in place, so that if some time later the code generator is 
+ * adapted to generate independent files, it will still work safely.          */
+#ifndef QUEX_INCLUDE_GUARD_compilator_Token__TOKEN__TOKEN__GENERATED_I
+#define QUEX_INCLUDE_GUARD_compilator_Token__TOKEN__TOKEN__GENERATED_I
+
+#include "compilator\compilator-token"
+
+
+
+inline
+compilator_Token::compilator_Token()
+{
+#   define self (*this)
+#   define LexemeNull  (&compilator_LexemeNull)
+
+#   undef  LexemeNull
+#   undef  self
+}
+
+inline
+compilator_Token::compilator_Token(const compilator_Token& Other)
+{
+   compilator_Token_copy(this, &Other);
+#   define self (*this)
+#   define LexemeNull  (&compilator_LexemeNull)
+
+#   undef  LexemeNull
+#   undef  self
+}
+
+inline
+compilator_Token::~compilator_Token()
+{
+#   define self (*this)
+#   define LexemeNull  (&compilator_LexemeNull)
+
+#   undef  LexemeNull
+#   undef  self
+}
+
+inline compilator_Token& 
+compilator_Token::operator=(const compilator_Token& That) 
+{ /* 'this != &That' checked in 'copy' */ compilator_Token_copy(this, &That); return *this; }
+
+inline void
+compilator_Token_construct(compilator_Token* __this)
+{
+    /* Explicit constructor call by 'placement new' */
+    new ((void*)__this) compilator_Token;
+}
+
+inline void
+compilator_Token_destruct(compilator_Token* __this)
+{
+    if( ! __this ) return;
+    __this->compilator_Token::~compilator_Token();  
+}
+
+inline void
+compilator_Token_copy(compilator_Token* __this, const compilator_Token* __That)
+{
+#   define self  (*__this)
+#   define Other (*__That)
+#   define LexemeNull  (&compilator_LexemeNull)
+    if( __this == __That ) { return; }
+
+#   line 22 "compilator.qx"
+
+        self._id    = Other._id;
+        self.text   = Other.text;
+    #   ifdef     QUEX_OPTION_TOKEN_STAMPING_WITH_LINE_AND_COLUMN
+    #       ifdef QUEX_OPTION_LINE_NUMBER_COUNTING
+            self._line_n = Other._line_n;
+    #       endif
+    #       ifdef  QUEX_OPTION_COLUMN_NUMBER_COUNTING
+            self._column_n = Other._column_n;
+    #       endif
+    #   endif
+   
+#   line 284 "compilator\compilator-token"
+
+#   undef LexemeNull
+#   undef Other
+#   undef self
+   /* If the user even misses to copy the token id, then there's
+    * something seriously wrong.                                 */
+   __quex_assert(__this->id == __That->id);
+      __quex_assert(__this->_line_n == __That->_line_n);
+    __quex_assert(__this->_column_n == __That->_column_n);
+}
+
+
+inline bool 
+compilator_Token_take_text(compilator_Token*         __this, 
+                           const compilator_lexatom_t* Begin, 
+                           const compilator_lexatom_t* End)
+/* RETURNS: true -- if the token claims ownership over the given memory.
+ *          false -- if no ownership is claimed.                             */
+{
+#   define self      (*__this)
+#   define LexemeNull  (&compilator_LexemeNull)
+    (void)__this;
+
+#   line 112 "compilator.qx"
+
+#       if 0
+        {
+            /* Hint for debug: To check take_text change "#if 0" to "#if 1". */
+            QUEX_TYPE_CHARACTER* it = 0x0;
+            printf("%lX ", (long)__this);
+            printf("previous:  '");
+            for(it = (QUEX_TYPE_CHARACTER*)self.text.c_str(); *it ; ++it) printf("%04X.", (int)*it);
+            printf("'\n");
+            printf("take_text: '");
+            for(it = (QUEX_TYPE_CHARACTER*)Begin; it != End; ++it) printf("%04X.", (int)*it);
+            printf("'\n");
+        }
+#       endif
+
+        /* It cannot be assumed that the lexeme is zero terminated. */
+        self.text.assign(Begin, End-Begin);
+
+#       if 0
+        {
+            /* Hint for debug: To check take_text change "#if 0" to "#if 1". */
+            QUEX_TYPE_CHARACTER* it = 0x0;
+            printf("after:     '");
+            for(it = (QUEX_TYPE_CHARACTER*)self.text.c_str(); *it ; ++it) printf("%04X.", (int)*it);
+            printf("'\n");
+        }
+#       endif
+
+        /* This token copied the text from the chunk into the string, 
+         * so we do not claim owneship over it.                       */
+        return false;      
+   
+#   line 341 "compilator\compilator-token"
+
+#   undef  LexemeNull
+#   undef  self
+    /* Default: no ownership.                                                */
+    return false;
+}
+
+
+
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_compilator_Token__TOKEN__TOKEN__GENERATED_I */

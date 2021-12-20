@@ -1,0 +1,62 @@
+/* -*- C++ -*-  vim:set syntax=cpp: 
+ *
+ * (C) 2004-2010 Frank-Rene Schaefer
+ * ABSOLUTELY NO WARRANTY              */
+#ifndef QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__MODE
+#define QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__MODE
+
+#include "quexProcessed/lib/definitions"
+#include "quexProcessed/lib/buffer/Buffer"
+
+
+    
+ class quexProcessed;
+
+
+typedef struct QUEX_quexProcessed_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT quexProcessed_Mode_tag {  
+    const char* name;
+
+
+    void (*on_entry)(quexProcessed*, const struct quexProcessed_Mode_tag* FromMode);
+    void (*on_exit)(quexProcessed*, const struct quexProcessed_Mode_tag* ToMode);
+#   ifdef QUEX_OPTION_ASSERTS
+    bool (*has_base)(const struct quexProcessed_Mode_tag* Mode);
+    bool (*has_entry_from)(const struct quexProcessed_Mode_tag* Mode);
+    bool (*has_exit_to)(const struct quexProcessed_Mode_tag* Mode);
+#   endif
+
+    quexProcessed_Buffer_event_callbacks buffer_callbacks;
+
+    /* Choose the analyzer function to be the last, because it has a unique
+     * signature. The function pointers are assigned in a table. If the 
+     * content of this class changes, any mismatch of pointers is likely
+     * to trigger a compilation error, thus signalling that the setup is
+     * incorrect.                                                        */
+    quexProcessed_AnalyzerFunctionP      analyzer_function;
+} quexProcessed_Mode;
+
+inline void
+quexProcessed_Mode_uncallable_analyzer_function(quexProcessed*);
+
+
+
+inline void
+quexProcessed_Mode_on_entry_exit_null_function(quexProcessed*, const quexProcessed_Mode*);
+
+typedef struct QUEX_quexProcessed_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT {
+    const quexProcessed_Mode** begin;
+    const quexProcessed_Mode** end;
+    const quexProcessed_Mode** memory_end;
+} quexProcessed_ModeStack;
+
+inline bool  quexProcessed_ModeStack_construct(quexProcessed_ModeStack* me,
+                                                 const size_t          N);
+inline void  quexProcessed_ModeStack_destruct(quexProcessed_ModeStack* me);
+inline void  quexProcessed_ModeStack_resources_absent_mark(quexProcessed_ModeStack* me);
+inline bool  quexProcessed_ModeStack_resources_absent(quexProcessed_ModeStack* me);
+inline void  quexProcessed_ModeStack_print(quexProcessed_ModeStack* me);
+
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__QUEX_MODE */

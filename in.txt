@@ -1,0 +1,35 @@
+int a = 1;
+int b = 6;
+
+if (a >=3 && b < 6){		// aici am scris un comentariu
+				a = 4;
+	//b = 7;
+	//int c = 2;
+
+// a = 5;
+}
+
+
+				else
+		{
+	a = 5;		// aici altul
+}
+
+for(a = 0; a < 6; a = a+1)
+{
+	if (a < 6)
+	{
+		b = 3;
+	}
+}
+
+while(a < 15)
+{
+	a = a+2;
+}
+
+do
+{
+	b = b + 3;
+}
+while (b < 10)

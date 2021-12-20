@@ -1,0 +1,50 @@
+/* -*- C++ -*-   vim:set syntax=cpp:
+ * 
+ * PURPOSE: A 'feeder' coordinates the lexical analysis based on input that
+ *          is *NOT* delivered through a byte loader in the background. 
+ *
+ * See file 'Feeder.i' for detailed descriptions.
+ *
+ * (C) 2016 Frank-Rene Schaefer.                                             */
+#ifndef QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__ADAPTORS__FEEDER
+#define QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__ADAPTORS__FEEDER
+
+
+
+typedef struct {
+    quexProcessed* lexer;
+    quexProcessed_lexatom_t*  last_incomplete_lexeme_p;
+    quexProcessed_token_id_t  stream_terminating_token_id;
+} quexProcessed_FeederBase;
+
+ struct QUEX_quexProcessed_SETTING_USER_CLASS_DECLARATION_EPILOG_EXT quexProcessed_Feeder {
+
+    quexProcessed_FeederBase  base;
+
+    struct {
+        const void* begin_p;
+        const void* end_p;
+    } external_chunk;
+
+    quexProcessed_token_id_t  stream_terminating_token_id;
+
+
+public:
+    quexProcessed_Feeder(quexProcessed*, quexProcessed_token_id_t);
+    void             feed(const void* BeginP, const void* EndP);
+    quexProcessed_Token* deliver();
+};
+
+
+
+inline void             quexProcessed_Feeder_construct(quexProcessed_Feeder*   me, 
+                                                         quexProcessed* lexer,
+                                                         quexProcessed_token_id_t  StreamTerminatingTokenId);
+inline quexProcessed_Token* quexProcessed_Feeder_deliver(quexProcessed_Feeder* me);
+inline void             quexProcessed_Feeder_feed(quexProcessed_Feeder* me,
+                                                    const void* BeginP, 
+                                                    const void* EndP);
+
+
+
+#endif /* QUEX_INCLUDE_GUARD_quexProcessed__ANALYZER__ADAPTORS__FEEDER */
